@@ -1,0 +1,1219 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font: 1em Roboto;
+}
+
+body{
+    background-image: url(fondao.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+
+.animated-text {
+    animation: moveText 3s linear infinite;
+
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.holis {
+    display: none;
+    list-style-type: none;
+    padding-left: 0;
+}
+#preguntasBtn {
+    font-size: 30px;
+    color:white;
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer;
+    outline: none; 
+}
+.sinharaja-para ul, .sri-padaya-para ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.holis {
+    font-size: 2vw;
+    text-align: center;
+    font-family: quicksand;
+    color: #999;
+}
+
+.sinharaja-para li, .sri-padaya-para li {
+    font-size: 2vw;
+    text-align: justify;
+    font-family: quicksand;
+    color: #999;
+}
+
+@media (max-width: 768px) {
+    .sinharaja-para li, .sri-padaya-para li {
+        font-size: 16px; /* Tamaño de letra más grande para dispositivos móviles */
+    }
+}
+@media (max-width: 768px) {
+    .holis {
+        font-size: 16px; 
+    }
+}
+
+
+
+
+@media only screen and (max-width: 580px) {
+    .chat-bot {
+        margin-top: 0;
+    }
+}
+
+
+
+
+
+
+header {
+    width: 100%;
+    height: 100vh;
+    background: url(fondomor.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+
+nav {
+    width: 100%;
+    height: auto;
+    color: #fff;
+    z-index: 999;
+}
+
+.upper_navbar {
+    background-color: #8597cc;
+}
+
+.menu1 {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.menu1 ul {
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+}
+
+.menu1 ul li {
+    list-style-type: none;
+    display: inline-block;
+    line-height: 40px;
+    padding: 0px 20px;
+}
+
+.menu1 ul li a {
+    color: #fff;
+    font-size: 10pt;
+    text-decoration: none;
+}
+
+.menu1 ul li:hover {
+    background-color: #0a9cc9;
+    transition: 0.3s;
+}
+
+.menu-icon {
+    display: none;
+}
+
+.lower_navbar {
+    width: 100%;
+    height: 70px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.lower_navbar_content {
+    width: 85%;
+    margin: 0 auto;
+}
+
+/* ... (rest of your existing styles) ... */
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 768px) {
+    .menu1 ul {
+        display: none;
+    }
+
+    .menu-icon {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .lower_navbar .dropdown-menu {
+        width: 100%;
+    }
+
+    .lower_navbar .logo {
+        float: none;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Add more styles as needed for smaller screens */
+
+    .dropdown-menu {
+        max-width: 200px; /* Ajusta el valor según tus necesidades */
+      }
+      
+}
+
+.lower_navbar .logo img {
+    width: auto;
+    height: 100%;
+}
+
+.lower_navbar .dropdown-menu {
+    width: 40%;
+}
+
+.lower_navbar .dropdown-menu,
+.lower_navbar .dropdown-menu ul {
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lower_navbar .dropdown-menu li a,
+.lower_navbar .dropdown-menu ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.lower_navbar .dropdown-menu li {
+    display: block;
+    padding: 9px 0;
+    transition: 0.3s;
+}
+
+.lower_navbar .dropdown-menu li:hover {
+    background: #444;
+}
+
+.lower_navbar .dropdown-menu li a {
+    padding: 2px;
+}
+
+.lower_navbar .dropdown-menu ul {
+    display: none;
+    margin-top: 15px;
+}
+
+.lower_navbar .dropdown-menu ul li {
+    padding: 15px 0px;
+    display: block;
+    background: #000;
+}
+
+.lower_navbar .dropdown-menu ul li:hover {
+    background: #333;
+}
+
+.lower_navbar .dropdown-menu li:hover ul {
+    display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    .lower_navbar .dropdown-menu {
+        width: 100%;
+    }
+
+    .lower_navbar .dropdown-menu li {
+        padding: 10px 0;
+    }
+
+    .lower_navbar .dropdown-menu li a {
+        padding: 15px;
+    }
+}
+.lower_navbar .dropdown-menu ul {
+    display: none;
+    margin-top: 15px;
+}
+
+.lower_navbar .dropdown-menu ul li {
+    padding: 10px 0;
+    display: block;
+    background: #000;
+}
+
+.lower_navbar .dropdown-menu ul li:hover {
+    background: #333;
+}
+
+.lower_navbar .dropdown-menu li:hover ul {
+    display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    .lower_navbar .dropdown-menu ul {
+        margin-top: 10px;
+    }
+
+    .lower_navbar .dropdown-menu ul li {
+        padding: 8px 0;
+    }
+}
+
+.lower_navbar .dropdown-menu ul li:hover {
+    background: #333;
+}
+
+.lower_navbar .dropdown-menu li:hover ul {
+    display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    .lower_navbar .dropdown-menu ul li:hover {
+        background: transparent; /* Evitar que el fondo siga siendo oscuro en pantallas pequeñas */
+    }
+
+    .lower_navbar .dropdown-menu li:hover ul {
+        display: none; /* Ocultar submenú en pantallas pequeñas */
+    }
+    
+    .fas {
+        padding-left: 0; /* Ajustar el espaciado en pantallas pequeñas si es necesario */
+    }
+}
+
+/*//////////////////////////Header title div\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+.header-title {
+    position: absolute;
+    text-transform: uppercase;
+    text-align: center;
+    height: 300px;
+    font-family: quicksand;
+    color: white;
+    top: 50%; /* Cambié top del 45% al 50% */
+    left: 50%; /* Cambié left del 17.8% al 50% */
+    transform: translate(-50%, -50%); /* Centrar el elemento con transform */
+}
+
+#main-title {
+    font-family: quicksand;
+    font-weight: 100;
+    font-size: 4vw; /* Cambié px a vw para hacerlo más responsive */
+    text-shadow: 5px 5px 10px black;
+}
+
+#sub-title {
+    font-family: quicksand;
+    font-size: 2vw; /* Cambié px a vw para hacerlo más responsive */
+    letter-spacing: 0.1em; /* Cambié px a em para hacerlo más responsive */
+    word-spacing: 0.25em; /* Cambié px a em para hacerlo más responsive */
+    margin: 10px 0 20px 0;
+    text-shadow: 5px 5px 10px black;
+}
+
+/* Media query para ajustes adicionales en pantallas pequeñas si es necesario */
+@media only screen and (max-width: 768px) {
+    #main-title {
+        font-size: 24px; /* Cambiar a un tamaño de fuente fijo para pantallas pequeñas si es necesario */
+    }
+
+    #sub-title {
+        font-size: 14px; /* Cambiar a un tamaño de fuente fijo para pantallas pequeñas si es necesario */
+    }
+}
+
+#main-title span{
+	font-weight: 700;
+}
+#search-bar{
+	margin: 30px 0;
+	padding: 20px auto;
+	display: inline-flex;
+}
+#search-bar input{
+	padding: 0 20px;
+	line-height: 50px;
+	width: 480px;
+	border: none;
+	font-size: 18px;
+	font-family: quicksand;
+	font-weight: 700;
+	background: rgba(255,255,255, 0.6);
+}
+#search-bar input:focus{
+	background: rgba(255,255,255, 1);
+}
+#search-bar button{
+	background: rgba(28,175,38,0.6);
+	border: none;
+	width: 110px;
+	line-height: 50px;
+}
+#search-bar button:hover{
+	cursor: pointer;
+	background: rgba(28,175,38,1);
+}
+#search-bar button .fa-search{
+	vertical-align: middle;
+	color: #fff;
+}
+#title-button{
+	margin: 30px;
+}
+#title-botton:hover{
+	color: #fff;
+}
+#title-button a{
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 15px;
+	border-radius: 40px;
+	transition: 0.4s;
+}
+#title-button a:hover {
+    color: #fff;
+    background: transparent;
+}
+
+/*/////////////////////////////image set\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+.image-set {
+    width: 90%;
+    margin: 50px auto; /* Ajusté el margen superior para pantallas más pequeñas */
+}
+
+.image-set .image-box {
+    position: relative;
+    text-align: center;
+    display: block; /* Cambié de inline-flex a block para centrar la imagen */
+}
+
+.image-set img {
+    max-width: 100%; /* Hacer que la imagen sea responsive y no exceda su contenedor */
+    height: auto;
+}
+
+.image-set .image-box .image-content {
+    position: absolute;
+    overflow: hidden;
+    bottom: 1%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 0%;
+    transition: 0.5s ease;
+}
+
+/* Media query para ajustes adicionales en pantallas pequeñas si es necesario */
+@media only screen and (max-width: 768px) {
+    .image-set {
+        width: 100%; /* Hacer que el conjunto de imágenes ocupe el ancho completo en pantallas pequeñas */
+        margin: 30px auto; /* Ajustar el margen superior en pantallas más pequeñas */
+    }
+
+    .image-set .image-box {
+        text-align: center;
+    }
+
+    #title-button a:hover {
+        background: transparent; /* Ajuste adicional si es necesario para pantallas pequeñas */
+    }
+}
+
+.image-set img {
+    max-width: 100%; /* Hacer que la imagen sea responsive y no exceda su contenedor */
+    height: auto;
+}
+
+.image-set .image-box {
+    position: relative;
+    text-align: center;
+}
+
+.image-set .image-box .image-content {
+    position: absolute;
+    overflow: hidden;
+    bottom: 1%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 0%;
+    transition: 0.5s ease;
+}
+
+.image-set .image-box .image-content .text {
+    position: absolute;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: auto;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-set .image-box .image-content .text a {
+    text-decoration: none;
+}
+
+/* Media query para ajustes adicionales en pantallas pequeñas si es necesario */
+@media only screen and (max-width: 768px) {
+    .image-set {
+        width: 100%; /* Hacer que el conjunto de imágenes ocupe el ancho completo en pantallas pequeñas */
+        margin: 30px auto; /* Ajustar el margen superior en pantallas más pequeñas */
+    }
+
+    .image-set .image-box {
+        text-align: center;
+    }
+}
+
+.image-set .image-box .image-content .text h1 {
+    color: #fff;
+    font-family: quicksand;
+    font-size: 3vw; /* Ajuste de tamaño de fuente responsive */
+}
+
+.image-set .image-box:hover .image-content {
+    cursor: pointer;
+    height: 25%;
+    transition: 0.5s;
+}
+
+/*////////////////////top attraction\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+.top-attractions {
+    width: 100%;
+    height: auto;
+    background: url(waos.jpeg);
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.top-attractions-back {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.top-attractions-content {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0 40px 0; /* Ajuste de espacio en pantallas más pequeñas */
+}
+
+/* Media query para ajustes adicionales en pantallas pequeñas si es necesario */
+@media only screen and (max-width: 768px) {
+    .image-set .image-box .image-content .text h1 {
+        font-size: 24px; /* Tamaño de fuente fijo para pantallas pequeñas */
+    }
+
+    .top-attractions-content {
+        padding: 10px 0 20px 0; /* Ajuste de espacio adicional en pantallas más pequeñas */
+    }
+}
+
+.attractions-topic {
+    width: 80%; /* Ajuste de ancho para pantallas más pequeñas */
+    margin: 0 auto;
+    padding: 15px 10px; /* Ajuste de espacio interno para pantallas más pequeñas */
+    background: #182C61;
+    border-radius: 0 0 25px 25px; /* Reducción de la curvatura del borde para pantallas más pequeñas */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+}
+
+.attractions-topic h1 {
+    font-family: quicksand;
+    font-size: 3vw; /* Tamaño de fuente responsive */
+    color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.sinharaja,
+.sri-padaya {
+    padding: 10px; /* Ajuste de espacio interno para pantallas más pequeñas */
+    border-left: none; /* Eliminación de borde izquierdo para pantallas más pequeñas */
+    border-right: none; /* Eliminación de borde derecho para pantallas más pequeñas */
+}
+
+.sinharaja-content h3,
+.sri-padaya-content h3 {
+    color: #fff;
+    font-family: quicksand;
+    letter-spacing: 1px;
+}
+
+.sinharaja-content,
+.sri-padaya-content {
+    width: 100%;
+    display: block; /* Cambio de inline-flex a block para apilar los elementos */
+}
+
+.sinharaja-para,
+.sri-padaya-para {
+    width: 100%; /* Ajuste de ancho para pantallas más pequeñas */
+}
+
+.sinharaja-para p,
+.sri-padaya-para p {
+    font-size: 14px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    text-align: justify;
+    font-family: quicksand;
+    color: #999;
+}
+
+.sinharaja-para a,
+.sri-padaya-para a {
+    color: #fff;
+    font-size: 10px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 2px solid #fff;
+    border-radius: 15px 0 15px 0;
+    transition: 0.4s;
+}
+
+/* Media query para ajustes adicionales en pantallas pequeñas si es necesario */
+@media only screen and (max-width: 768px) {
+    .attractions-topic {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .attractions-topic h1 {
+        font-size: 24px; /* Tamaño de fuente fijo para pantallas pequeñas */
+    }
+
+    .sinharaja,
+    .sri-padaya {
+        padding: 10px;
+        border-left: 3px dashed #fff;
+        border-right: 3px dashed #fff;
+    }
+
+    .sinharaja-para a,
+    .sri-padaya-para a {
+        font-size: 10px;
+    }
+}
+
+.sinharaja-content h3,
+.sri-padaya-content h3 {
+    color: #fff;
+    font-family: quicksand;
+    letter-spacing: 1px;
+}
+
+.sinharaja-content,
+.sri-padaya-content {
+    width: 100%;
+    display: block; /* Cambio de inline-flex a block para apilar los elementos */
+}
+
+.sinharaja-para,
+.sri-padaya-para {
+    width: 100%; /* Ajuste de ancho para pantallas más pequeñas */
+}
+
+.sinharaja-para p,
+.sri-padaya-para p {
+    font-size: 14px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    text-align: justify;
+    font-family: quicksand;
+    color: #999;
+}
+
+/* Media query para ajustes adicionales en pantallas pequeñas si es necesario */
+@media only screen and (max-width: 768px) {
+    .sinharaja-content,
+    .sri-padaya-content {
+        display: block; /* Cambio a block para apilar los elementos */
+    }
+
+    .sinharaja-para,
+    .sri-padaya-para {
+        width: 100%;
+    }
+
+    .sinharaja-para p,
+    .sri-padaya-para p {
+        font-size: 12px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    }
+}
+
+.sinharaja-para a,
+.sri-padaya-para a {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 2px solid #fff;
+    border-radius: 15px 0 15px 0;
+    transition: 0.4s;
+}
+
+.sinharaja-para a:hover,
+.sri-padaya-para a:hover {
+    background: #fff;
+    color: #000;
+}
+
+.sri-padaya-para p a {
+    text-align: right;
+}
+
+.sinharaja-image,
+.sri-padaya-image {
+    width: 100%; /* Ajuste de ancho para pantallas más pequeñas */
+    padding: 10px 0; /* Ajuste de espacio interno para pantallas más pequeñas */
+}
+
+@media only screen and (min-width: 768px) {
+    .sinharaja-image,
+    .sri-padaya-image {
+        width: 32%; /* Restaurar el ancho original en pantallas más grandes */
+        padding: 10px 0 0 25px;
+    }
+}
+
+.sinharaja-image img,
+.sri-padaya-image img {
+    width: 100%;
+    max-width: 100%; /* Hacer que las imágenes sean responsive */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+    transition: 0.4s;
+}
+
+.sinharaja-image img:hover {
+    transform: rotate(-4deg);
+}
+
+.sri-padaya-image img:hover {
+    transform: rotate(4deg);
+}
+
+.vertical-divider1,
+.vertical-divider2 {
+    margin: 20px auto; /* Ajuste de margen para pantallas más pequeñas */
+}
+
+/* Media query para ajustes adicionales en pantallas pequeñas si es necesario */
+@media only screen and (max-width: 768px) {
+    .vertical-divider1,
+    .vertical-divider2 {
+        margin: 10px auto; /* Ajuste de margen adicional para pantallas más pequeñas */
+    }
+
+    .access-section {
+        flex-direction: column; /* Apilar elementos en pantallas más pequeñas */
+        align-items: center; /* Centrar los elementos en pantallas más pequeñas */
+    }
+
+    .tourism-news-carousal-div {
+        width: 100%; /* Hacer que el ancho sea completo en pantallas más pequeñas */
+        margin-top: 20px; /* Ajuste de margen superior para pantallas más pequeñas */
+    }
+}
+
+#slider-title h1,
+#accommodation-title h1 {
+    font-family: quicksand;
+    font-weight: 300;
+}
+
+#slider-title span,
+#accommodation-title span {
+    font-weight: 700;
+}
+
+#slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+#slider figure {
+    width: 400%;
+    position: relative;
+    margin: 0;
+    left: 0;
+    animation: 20s slider infinite;
+}
+
+#slider figure img {
+    width: 100%; /* Hacer que las imágenes ocupen el ancho completo del contenedor */
+    float: left;
+}
+
+/* Ajuste de animación para pantallas más pequeñas */
+@media only screen and (max-width: 768px) {
+    #slider figure {
+        animation: 10s slider infinite; /* Reducción del tiempo de animación para pantallas más pequeñas */
+    }
+}
+
+#slider figure img {
+    width: 100%; /* Hacer que las imágenes ocupen el ancho completo del contenedor */
+    float: left;
+}
+
+@keyframes slider {
+    0% {
+        left: 0%;
+    }
+    10% {
+        left: 0%;
+    }
+    20% {
+        left: -100%;
+    }
+    30% {
+        left: -100%;
+    }
+    40% {
+        left: -200%;
+    }
+    50% {
+        left: -200%;
+    }
+    60% {
+        left: -300%;
+    }
+    70% {
+        left: -300%;
+    }
+    80% {
+        left: -400%;
+    }
+    90% {
+        left: -400%;
+    }
+    100% {
+        left: 0%; /* Reiniciar el slider para la próxima iteración */
+    }
+}
+
+/* Ajuste de animación para pantallas más pequeñas */
+@media only screen and (max-width: 768px) {
+    @keyframes slider {
+        0% {
+            left: 0%;
+        }
+        8% {
+            left: 0%;
+        }
+        16% {
+            left: -100%;
+        }
+        24% {
+            left: -100%;
+        }
+        32% {
+            left: -200%;
+        }
+        40% {
+            left: -200%;
+        }
+        48% {
+            left: -300%;
+        }
+        56% {
+            left: -300%;
+        }
+        64% {
+            left: -400%;
+        }
+        72% {
+            left: -400%;
+        }
+        80% {
+            left: 0%; /* Reiniciar el slider para la próxima iteración */
+        }
+    }
+}
+
+.book-accommodation-div {
+    width: 100%; /* Hacer que el ancho sea completo en pantallas más pequeñas */
+    margin: 0;
+    padding: 0 20px; /* Ajustar el espacio interno para pantallas más pequeñas */
+}
+
+.fa-plus {
+    margin-right: 2px; /* Reducción del espacio entre el ícono y el texto */
+}
+
+button.collapse {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: quicksand;
+    font-size: 16px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    margin: 0;
+    padding: 10px 15px; /* Ajustar el espacio interno para pantallas más pequeñas */
+    text-align: left;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.2s linear;
+}
+
+button.collapse::after {
+    content: '\f067';
+    font-family: "quicksand";
+    font-size: 14px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    padding: 5px 10px 5px 0;
+    float: left;
+}
+
+/* Ajuste para pantallas más pequeñas */
+@media only screen and (max-width: 768px) {
+    button.collapse::after {
+        font-size: 12px;
+    }
+}
+
+button.collapse.active::after {
+    content: '\f068';
+}
+
+button.collapse:hover,
+button.collapse.active {
+    background: #adadad;
+}
+
+.collapse-content {
+    padding: 0 10px; /* Ajuste de espacio interno para pantallas más pequeñas */
+    line-height: 25px; /* Ajuste de altura de línea para pantallas más pequeñas */
+    border-left: 2px solid #eee;
+    border-right: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+    max-height: 0;
+    overflow: hidden;
+    background: whitesmoke;
+    transition: max-height 0.2s ease-in-out;
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media only screen and (max-width: 768px) {
+    button.collapse,
+    button.collapse.active {
+        padding: 10px 15px; /* Ajuste de relleno para botones en pantallas más pequeñas */
+        font-size: 14px; /* Ajuste de tamaño de fuente para botones en pantallas más pequeñas */
+    }
+
+    .collapse-content {
+        padding: 0 10px; /* Ajuste de espacio interno para pantallas más pequeñas */
+        line-height: 20px; /* Ajuste de altura de línea para pantallas más pequeñas */
+    }
+}
+
+/*/////////////////////////footer\\\\\\\\\\\\\\\\*/
+
+.footer {
+    background: #112233;
+}
+
+.footer-content {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap; /* Ajuste para pantallas más pequeñas */
+}
+
+.footer-refs-content-1,
+.footer-refs-content-2,
+.footer-refs-content-3 {
+    width: 100%; /* Ajuste de ancho para pantallas más pequeñas */
+    margin-bottom: 20px; /* Espaciado entre las secciones para pantallas más pequeñas */
+}
+
+.footer-refs-content-1 h5,
+.footer-refs-content-2 h5,
+.footer-refs-content-3 h5 {
+    font-family: quicksand;
+    font-weight: 100;
+    font-size: 18px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    color: whitesmoke;
+}
+
+.footer-refs-content-1 h5 b,
+.footer-refs-content-2 h5 b,
+.footer-refs-content-3 h5 b {
+    font-weight: 700;
+}
+
+.footer-refs-content-1 ul,
+.footer-refs-content-2 ul,
+.footer-refs-content-3 ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-refs-content-1 ul li a,
+.footer-refs-content-2 ul li a,
+.footer-refs-content-3 ul li a {
+    color: whitesmoke;
+    font-size: 14px; /* Ajuste de tamaño de fuente para pantallas más pequeñas */
+    text-decoration: none;
+    line-height: 18px; /* Ajuste de altura de línea para pantallas más pequeñas */
+    transition: 0.4s;
+}
+
+.footer-refs-content-1 ul li a:hover,
+.footer-refs-content-2 ul li a:hover,
+.footer-refs-content-3 ul li a:hover {
+    color: #42b3f4;
+    padding-left: 10px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en pantallas más pequeñas */
+}
+
+.footer-refs-content-1,
+.footer-refs-content-2,
+.footer-refs-content-3 {
+    width: 100%; /* Ajustar el ancho al 100% en pantallas más pequeñas */
+    margin-bottom: 20px; /* Espaciado inferior para pantallas más pequeñas */
+}
+
+.footer-refs-content-1 h5,
+.footer-refs-content-2 h5,
+.footer-refs-content-3 h5 {
+    padding-bottom: 10px;
+    margin-right: 0; /* Eliminar el margen derecho en pantallas más pequeñas */
+    border-bottom: 2px solid #fff;
+}
+
+.lower-footer {
+    width: 100%;
+    color: #fff;
+    font-size: 13px;
+    font-family: quicksand;
+    font-weight: 300;
+    background: #112220;
+    padding: 20px 0; /* Ajuste de espacio interno en pantallas más pequeñas */
+}
+
+.lower-footer-content {
+    width: 100%; /* Ajuste para que ocupe el ancho completo en pantallas más pequeñas */
+    margin: 0 auto;
+    padding: 5px 0;
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en pantallas más pequeñas */
+}
+
+#footer-align-left {
+    width: 100%; /* Ajuste para que ocupe el ancho completo en pantallas más pequeñas */
+    padding: 13px 0;
+    text-align: center; /* Centrar el contenido en pantallas más pequeñas */
+}
+
+#footer-align-right {
+    text-align: center; /* Centrar el contenido en pantallas más pequeñas */
+    width: 100%; /* Ajuste para que ocupe el ancho completo en pantallas más pequeñas */
+    padding: 10px 0;
+}
+
+#footer-align-right a {
+    padding: 0 4px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.DROPI {
+    font-size: 30px; /* Reducción del tamaño de fuente para pantallas más pequeñas */
+}
+
+/* Ajuste para pantallas más pequeñas */
+@media only screen and (max-width: 758px) {
+    #footer-align-right {
+        padding-top: 10px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    
+  }
+  
+  .video-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; /* Controla la altura del contenedor (relación de aspecto 16:9) */
+}
+
+.spectacular-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Ajusta el color y la opacidad del overlay según tus necesidades */
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Ajusta el color del texto según tus necesidades */
+}
+
+  /* Estilos CSS para dar formato a la interfaz del chat */
+        body {
+            font-family: quicksand;
+            margin: 0; /* Eliminar el margen predeterminado del cuerpo para abarcar toda la ventana */
+        }
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50px; /* Ajustar el ancho de la imagen */
+            height: 75px; /* Ajustar la altura de la imagen */
+            border-radius: 50%; /* Hacer que la imagen sea circular */
+            z-index: 1001; /* Asegurar que la imagen del chat esté sobre el chat-container */
+        }
+        .chat-container {
+            width: 360px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 360px;
+            overflow-y: auto; /* Cambiar a auto para habilitar la barra de desplazamiento vertical si es necesario */
+            position: fixed;
+            bottom: 20px;
+            right: 80px; /* Ajustar la posición a la derecha para evitar superposiciones */
+            display: none; /* Ocultar inicialmente el área del chat */
+            z-index: 1000; /* Ajustar el índice z para asegurar que esté por encima de otros elementos */
+            background: rgb(0, 0, 0);
+        }
+
+        @media screen and (max-width: 767px) {
+    .chat-container {
+        width: 70%; /* Puedes ajustar el ancho según tus necesidades */
+        margin: 0 auto;
+        right: auto;
+        left: 50%; /* Centrar el chat en dispositivos móviles */
+        transform: translateX(-50%);
+    }
+}
+
+
+
+        .chat-header {
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px; /* Agregado para asegurar que el texto no se corte */
+            border-bottom: 1px solid #ccc; /* Agregado para agregar un borde inferior */
+        }
+        .chat-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            max-height: calc(100% - 60px); /* Limitar la altura del chat-box al 100% del contenedor, menos el espacio para el encabezado */
+            box-sizing: border-box; /* Incluir el relleno y el borde en la altura total */
+            overflow-y: auto; /* Habilitar la barra de desplazamiento vertical si es necesario */
+        }
+        .user-message {
+            text-align: right;
+            color:lightcyan;
+        }
+        .bot-message {
+            text-align: left;
+            color:moccasin;
+        }
+        #chat-form {
+            margin-top: 10px; /* Añadir espacio encima del formulario */
+            display: flex; /* Utilizar flexbox para alinear elementos internos */
+        }
+        #user-message {
+            flex: 1; /* Hacer que el campo de entrada ocupe el espacio disponible */
+        }
+        #chat-form button {
+            margin-left: 10px; /* Añadir espacio a la izquierda del botón */
+        }
+        .imagen-redonda {
+            border-radius: 50%;
+        }
+        .chat-bot {
+            color: white;
+            background-color: black;
+        }
+        .btn-enviar {
+            background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
+            -webkit-border-radius: 28;
+            -moz-border-radius: 28;
+            border-radius: 28px;
+            text-shadow: 3px 2px 1px #9daef5;
+            -webkit-box-shadow: 6px 5px 24px #666666;
+            -moz-box-shadow: 6px 5px 24px #666666;
+            box-shadow: 6px 5px 24px #666666;
+            font-family: quicksand;
+            color: #fafafa;
+            font-size: 12px;
+            padding: 12px;
+            text-decoration: none;
+        }
+        .btn-mensaje {
+            -webkit-border-radius: 28;
+            -moz-border-radius: 28;
+            border-radius: 28px;
+            text-shadow: 3px 2px 1px #9daef5;
+            -webkit-box-shadow: 6px 5px 24px #666666;
+            -moz-box-shadow: 6px 5px 24px #666666;
+            box-shadow: 6px 5px 24px #666666;
+        }
+
+
+        /* Estilos responsivos */
+        @media screen and (max-width: 740px) {
+            .lower_navbar_content {
+                flex-direction: column;
+            }
+
+            .lower_navbar .logo {
+                margin-bottom: 10px;
+            }
+
+            .dropdown-menu {
+                width: 100%;
+            }
+
+            
+        }
+   

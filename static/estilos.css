@@ -1,0 +1,60 @@
+.chat-container {
+    width: 80%;
+    /* ... otras propiedades ... */
+}
+
+@media only screen and (max-width: 768px) {
+    /* Estilos para pantallas más pequeñas */
+    .chat-container {
+        width: 90%;
+        right: 20px; /* Ajusta la posición para pantallas más pequeñas */
+    }
+
+    /* Agrega más estilos según sea necesario */
+}
+body {
+    overflow-x: hidden;
+    font-family: nunito;
+}
+@media only screen and (max-width: 768px) {
+    /* Estilos para pantallas más pequeñas */
+    .menu-icon {
+        display: block; /* Asegura que el ícono de menú sea visible en pantallas pequeñas */
+    }
+
+    /* Agrega más estilos según sea necesario */
+}
+.header-title {
+    font-size: 2em; /* Ajusta según sea necesario */
+}
+@media only screen and (max-width: 700px) {
+    .header-title {
+        font-size: 1.5em; /* Ajusta el tamaño de fuente para pantallas más pequeñas */
+        /* Agrega más estilos según sea necesario */
+    }
+}
+
+.header-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-title {
+    margin-bottom: 2px; /* Ajusta según sea necesario */
+}
+
+#sub-title {
+    font-size: 0.3em; /* Ajusta según sea necesario */
+}
+@media only screen and (max-width: 700px) {
+    #title-button {
+        margin-top: 10px; /* Ajusta el espacio encima del botón para pantallas más pequeñas */
+    }
+}
+nav{
+	width: 100%;
+	height: auto;
+	color: #fff;
+	z-index: 999;
+}

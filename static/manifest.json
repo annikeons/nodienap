@@ -1,0 +1,20 @@
+{
+  "name": "Nodie",
+  "short_name": "Nodie",
+  "start_url": "mainx.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ffd500",
+  "icons": [
+    {
+      "src": "sleeper duck.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "sleeper duck.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

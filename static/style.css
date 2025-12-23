@@ -1,0 +1,187 @@
+ /* Reset y fuentes */
+ * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'nunito';
+}
+body {
+    background: linear-gradient(to bottom, #fffae3, #d0f0fd);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Modos */
+body.dark {
+    background: linear-gradient(to bottom, #2c3e50, #34495e);
+    color: #eee;
+}
+
+/* Contenedor principal */
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* Títulos */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffb347;
+}
+
+/* Menú inferior tipo Spotify */
+.menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #ffffffcc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 2px solid #ffd166;
+    backdrop-filter: blur(10px);
+}
+
+.menu button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.menu button:hover {
+    color: #ffb347;
+}
+
+/* Secciones */
+.section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+.active {
+    display: block;
+}
+@keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
+
+/* Alarmas */
+.alarm-container {
+    max-width: 400px;
+    margin: auto;
+    background: #fff7eb;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.alarm-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #ff9f1c;
+}
+.alarm-container input, .alarm-container select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ffb347;
+    margin-bottom: 10px;
+    outline: none;
+}
+.alarm-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffd166;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.alarm-container button:hover {
+    background-color: #ffb347;
+}
+
+/* Lista de alarmas */
+.alarm-list {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.alarm-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff3d1;
+    padding: 10px;
+    border-radius: 10px;
+}
+.alarm-item button {
+    background: #ff6b6b;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Consejos y Eventos */
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: auto;
+}
+.card {
+    background: #fffefc;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-5px); }
+.card img { width: 50px; height: 50px; }
+.card p { font-size: 16px; color: #555; }
+
+/* Eventos */
+.event-form input, .event-form button {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ffb347;
+    width: 100%;
+    outline: none;
+}
+.event-form button {
+    background-color: #ffd166;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+.event-form button:hover { background-color: #ffb347; }
+
+/* Configuración */
+.config-item {
+    margin-bottom: 20px;
+}
+.config-item label {
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .cards, .alarm-container, .event-form { padding: 0 10px; }
+}
