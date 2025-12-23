@@ -45,11 +45,10 @@ def get_response(intent):
 
 @app.route('/get_response', methods=['POST'])
 def get_bot_response():
-    user_message = request.form.get('user_message', '')
+    user_message = request.form.get('user_message')
     intent = predict_intent(user_message)
     bot_response = get_response(intent)
 
     return jsonify({
-        'user_response': user_message,
         'bot_response': bot_response
     })

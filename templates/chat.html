@@ -234,26 +234,21 @@ async function sendMessage() {
     document.getElementById("user-message").value = "";
 
     try {
-        // se deja false pq soy pobre para comporar la cuota pipipip
-        const USE_GPT = false;
+    const formData = new FormData();
+    formData.append("user_message", userMessage);
 
-       
-             const endpoint = "http://127.0.0.1:5000/chat";
+    const response = await fetch("/get_response", {
+        method: "POST",
+        body: formData
+    });
 
+    const data = await response.json();
+    addMessage("bot", data.bot_response);
 
-        // Envía el mensaje al backend
-        const response = await fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: userMessage })
-        });
-
-        const data = await response.json();
-        addMessage("bot", data.response);
-    } catch (error) {
-        console.error("Error:", error);
-        addMessage("bot", "No puedo conectarme con el servidor 😢");
-    }
+} catch (error) {
+    console.error("Error:", error);
+    addMessage("bot", "No puedo conectarme con el servidor 😢");
+}
 }
 
 // ✅ Abre o cierra el chat
