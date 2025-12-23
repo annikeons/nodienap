@@ -432,7 +432,7 @@
 
 
 {
-    "tag":"significado_nodie",
+    "tag":"significado",
         "patterns": [
             "por qué te llamas nodie", "qué significa nodie", "por qué ese nombre", "quien es nodie"
         ],
@@ -513,10 +513,10 @@
 
 
 {
-    "tag":"historia_aventura",
+    "tag":"aventura",
         "patterns": [
             "cuentame una aventura", "una historia de aventura", "quiero una historia de aventura",
-            "cuéntame una aventura", "dime una aventura", "aventura nodie",
+            "cuéntame una aventura", "dime una aventura", "aventura nodie","aventura",
             "buscame una historia de aventura", "relatame una aventura", "cuenta una aventura corta", "una historia"
         ],
         "responses": [
@@ -538,11 +538,11 @@
 
 
 {
-    "tag":"historia_romantica",
+    "tag":"romantica",
         "patterns": [
             "una historia romantica", "cuentame una historia romantica", "quiero una historia de amor",
             "cuentame algo romantico", "dime una historia de amor", "historia de amor nodie",
-            "cuentame algo bonito", "relatame una historia romantica"
+            "cuentame algo bonito", "relatame una historia romantica","romance"
         ],
         "responses": [
             "Había una vez dos patos que se cruzaban cada tarde en el lago... y un día, el destino los hizo nadar juntos 💛",
@@ -557,10 +557,10 @@
 
 
 {
-    "tag":"historia_terror",
+    "tag":"terror",
         "patterns": [
             "una historia de terror", "cuentame algo de miedo", "quiero una historia de terror",
-            "cuentame algo aterrador", "dame una historia de miedo", "historia de suspenso"
+            "cuentame algo aterrador", "dame una historia de miedo", "historia de suspenso","terror"
         ],
         "responses": [
             "Una noche el lago estaba en silencio… hasta que un cuac resonó sin que hubiera nadie 🦆👻",
@@ -575,10 +575,10 @@
 
 
 {
-    "tag":"historia_graciosa",
+    "tag":"graciosa",
         "patterns": [
             "una historia graciosa", "cuentame algo divertido", "quiero una historia graciosa",
-            "dame una historia para reirme", "cuentame algo chistoso","Historia graciosa"
+            "dame una historia para reirme", "cuentame algo chistoso","Historia graciosa","graciosa"
         ],
         "responses": [
             "Una vez quise volar... pero caí en el agua y terminé haciendo surf sin querer 🏄‍♂️🦆",
@@ -599,7 +599,7 @@
     "tag":"adivinanzas",
         "patterns": [
             "dame una adivinanza", "quiero una adivinanza", "hazme un acertijo", "dame un acertijo",
-            "tienes una adivinanza para mi", "dame una adivinanza corta", "acertijo para pensar"
+            "tienes una adivinanza para mi", "dame una adivinanza corta", "acertijo para pensar","adivinanza"
         ],
         "responses": [
             "Vuelo sin alas, lloro sin ojos. ¿Qué soy? 🌧️ (Respuesta: la nube)",
