@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylex.css') }}">
+   <link rel="shortcut icon" href="{{ url_for('static', filename='sleeper duck.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<meta name="theme-color" content="#ffd500">
+
+</head>
+<body>
+
+
+    <div class="content">
+    <div id="home" class="section active">
+        <h1 class="animated-text"> ¡Que gusto verte! </h1>
+        <p  class="clancy"> Nodie, tu pausa ideal para relajarte <br> <br>
+         </p>
+          <h1 class="animated-text"> Palabras Para Ti: </h1>
+        <div class="cards" class="consejo-box" class="consejo-card" >
+            <div class="card"><img src="{{ url_for('static', filename='sleeper duck.png') }}">
+<p id="consejo-texto">Las alarmas no solo son para cuando duermes, también cuando estás activo y quieres sonidos relajantes</p></div>
+            
+        </div>
+    </div>
+    
+   <div id="nodie" class="section">
+    <h1 class="uwu"> Nodie</h1>
+    <iframe 
+        src="{{ url_for('chat') }}"
+        style="width:100%; height:440px; border:none; border-radius:15px;" 
+        title="Chatbot Nodie">
+    </iframe>
+</div>
+
+ 
+    <div id="alarm" class="section">
+        <h1 class="wapi"> Alarmas</h1>
+        <div class="alarm-container">
+            <button onclick="enableAudio()" style="margin-bottom:10px;">
+    🔊 Activar sonido
+</button>
+
+            <label>Hora:</label>
+            <input type="time" id="alarmTime">
+            <label>Sonido:</label>
+            <select id="alarmSound">
+                <option value="sound1">Sonido 1 (elf meditation)</option>
+                <option value="sound2">Sonido 2 (forest)</option>
+                <option value="sound3">Sonido 3 (a very brady special)</option>
+                <option value="sound4">Sonido 4 (ancient wonds)</option>
+                <option value="sound5">Sonido 5 (isolation waltz)</option>
+                <option value="sound6">Sonido 6 (connecting rainbows)</option>
+            </select>
+            <label><input type="checkbox" id="alarmActive"> Activar alarma</label>
+            <button id="addAlarm">Agregar alarma</button>
+            <div class="alarm-list" id="alarmList"></div>
+        </div>
+    </div>
+
+
+  
+    <div id="events" class="section">
+    <h1>Pendientes</h1>
+    <div class="event-form">
+        <input type="text" id="eventName" placeholder="Nombre del evento">
+        <input type="time" id="eventStart" placeholder="Inicio">
+        <input type="time" id="eventEnd" placeholder="Fin">
+        <button id="addEvent">Agregar Pendiente</button>
+    </div>
+    <div class="cards" id="eventList"></div>
+</div>
+
+
+
+
+   
+    <div id="settings" class="section">
+        <h1></h1>
+        <div class="config-item">
+            <label>🌕Modo:⚫</label>
+            <select id="themeSelect">
+                <option value="light"> Modo Claro</option>
+                <option value="dark">Modo Oscuro</option>
+                
+            </select>
+        </div>
+
+    </div>
+   
+</div>
+
+
+
+<div class="menu">
+    <button onclick="showSection('home')">🏚️<span>Inicio</span></button>
+    <button onclick="showSection('alarm')">🕜<span>Alarmas</span></button>
+    <button onclick="showSection('events')">📋<span>Pendientes</span></button>
+    <button onclick="showSection('settings')">⚙️<span>Ayuda</span></button>
+    <button onclick="showSection('nodie')">🦆<span>Nodie</span></button>
+</div>
+
+
+
+<div id="alarmMessage" style="margin-top:10px; font-weight:bold; color:#b30000;"></div>
+
+<script>
+
+function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+const themeSelect=document.getElementById('themeSelect');
+themeSelect.addEventListener('change',()=>{ document.body.classList.toggle('dark',themeSelect.value==='dark'); });
+
+
+let audioEnabled = false;
+
+let alarms=[], activeAudios={};
+const alarmList=document.getElementById('alarmList');
+
+document.getElementById('addAlarm').addEventListener('click',()=>{
+    const time=document.getElementById('alarmTime').value;
+    const sound=document.getElementById('alarmSound').value;
+    const active=document.getElementById('alarmActive').checked;
+    if(!time) return alert("Selecciona una hora");
+    const id=Date.now();
+    alarms.push({id,time,sound,active,ringing:false});
+    renderAlarms();
+});
+function enableAudio() {
+    const testAudio = new Audio(
+        "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
+    );
+    testAudio.play()
+        .then(() => {
+            audioEnabled = true;
+            alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
+        })
+        .catch(() => {
+            alert("⚠️ Toca la pantalla para habilitar el sonido");
+        });
+}
+
+function playSound(alarmId,sound){
+    if (!audioEnabled) {
+        alert("🔊 Primero pulsa 'Activar sonido'");
+        return;
+    }
+
+    stopAlarm(alarmId);
+
+    const audio=new Audio();
+    switch(sound){
+        case 'sound1': audio.src='https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3'; break;
+        case 'sound2': audio.src='https://freepd.com/music/Elf%20Meditation.mp3'; break;
+        case 'sound3': audio.src='https://freepd.com/music/A%20Very%20Brady%20Special.mp3'; break;
+        case 'sound4': audio.src='https://freepd.com/music/Ancient%20Winds.mp3'; break;
+        case 'sound5': audio.src='https://freepd.com/music/Isolation%20Waltz.mp3'; break;
+        case 'sound6': audio.src='https://freepd.com/music/Connecting%20Rainbows.mp3'; break;
+    }
+
+    audio.loop=true;
+    audio.play().catch(e=>console.log("Error audio:",e));
+    activeAudios[alarmId]=audio;
+}
+
+
+function stopAlarm(alarmId){
+    if(activeAudios[alarmId]){
+        activeAudios[alarmId].pause();
+        delete activeAudios[alarmId];
+    }
+}
+
+function renderAlarms(){
+    alarmList.innerHTML='';
+    alarms.forEach(alarm=>{
+        const div=document.createElement('div');
+        div.className='alarm-item';
+        div.style.marginBottom='10px'; // CORRECCIÓN PARA NO QUEDAR FEAS
+        div.innerHTML=`
+            <span>${alarm.time} - ${alarm.sound} - ${alarm.active?'Activada':'Desactivada'}</span>
+            <button onclick="removeAlarm(${alarm.id})">Quitar</button>
+            <label style="margin-left:10px;">
+                <input type="checkbox" ${alarm.active?'checked':''} onchange="toggleAlarm(${alarm.id},this.checked)">
+                Activar
+            </label>
+            <button style="margin-left:5px;" onclick="stopAlarm(${alarm.id})">Detener</button>
+        `;
+        alarmList.appendChild(div);
+    });
+}
+
+function toggleAlarm(id,status){
+    const alarm=alarms.find(a=>a.id===id);
+    if(alarm) alarm.active=status;
+    renderAlarms();
+}
+
+function removeAlarm(id){
+    alarms=alarms.filter(a=>a.id!==id);
+    stopAlarm(id);
+    renderAlarms();
+}
+
+function showAlarmMessage(msg){
+    const div=document.getElementById('alarmMessage');
+    div.style.display='block';
+    div.innerText=msg;
+    setTimeout(()=>div.style.display='none',30000); 
+}
+
+setInterval(()=>{
+    const now=new Date();
+    const currentTime=now.toTimeString().slice(0,5);
+    alarms.forEach(alarm=>{
+        if(alarm.active && alarm.time===currentTime && !alarm.ringing){
+            alarm.ringing=true;
+            playSound(alarm.id,alarm.sound);
+            showAlarmMessage(`¡Alarma!  Hora: ${alarm.time}`);
+            setTimeout(()=>alarm.ringing=false,60000);
+        }
+    });
+},1000);
+
+const eventList = document.getElementById('eventList');
+const addBtn = document.getElementById('addEvent');
+
+function loadEvents() {
+    const events = JSON.parse(localStorage.getItem('events')) || [];
+    eventList.innerHTML = ''; 
+    events.forEach((ev, index) => addEventCard(ev, index));
+}
+
+function addEventCard(ev, index) {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+        <img src="agenda.png">
+        <p>${ev.name}: ${ev.start} - ${ev.end}</p>
+        <button class="delete-btn" data-index="${index}">❎</button>
+    `;
+    eventList.appendChild(div);
+}
+
+addBtn.addEventListener('click', () => {
+    const name = document.getElementById('eventName').value.trim();
+    const start = document.getElementById('eventStart').value;
+    const end = document.getElementById('eventEnd').value;
+
+    if (!name || !start || !end) return alert("Completa todos los campos");
+
+    const events = JSON.parse(localStorage.getItem('events')) || [];
+    events.push({ name, start, end });
+    localStorage.setItem('events', JSON.stringify(events));
+
+    loadEvents();
+
+    document.getElementById('eventName').value = '';
+    document.getElementById('eventStart').value = '';
+    document.getElementById('eventEnd').value = '';
+});
+
+eventList.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('delete-btn')) return;
+    const index = e.target.getAttribute('data-index');
+    const events = JSON.parse(localStorage.getItem('events')) || [];
+    events.splice(index, 1); // eliminar evento
+    localStorage.setItem('events', JSON.stringify(events));
+    loadEvents();
+});
+
+loadEvents();
+
+</script>
+
+
+<style>
+    
+        @media screen and (max-width: 768px) {
+            .lower_navbar_content {
+                flex-direction: column;
+            }
+
+            .lower_navbar .logo {
+                margin-bottom: px;
+            }
+
+            .dropdown-menu {
+                width: 100%;
+            }
+
+            
+        }
+</style>
+<script>
+  const consejos = [
+
+   "Si solo tienes 30 minutos libres, es mejor relajarte y no dormir",
+   "Si quieres chatear con Nodie, revisa *Ayuda*",
+   "Si solo tienes 30 minutos libres, es mejor relajarte y no dormir",
+"Nada se compara con contarle tu día a una persona real",
+"Evita dormir justo antes de tus actividades, podrías sentirte más cansado después",
+"Un descanso corto puede ayudarte a recuperar energía y concentración",
+"Eres valiente,lo estás haciendo bien",
+"Si te sientes agotado, una pausa breve puede marcar la diferencia",
+"Recuerda que descansar también es avanzar",
+"Tómate un momento para respirar y pensar en ti",
+"No tienes que hacerlo todo hoy, ve paso a paso",
+"Escucha a tu cuerpo, él sabe cuándo necesita un respiro",
+"A veces lo mejor que puedes hacer es detenerte un momento",
+"No se trata de hacer más, sino de hacerlo con calma",
+"Descansar no es perder el tiempo, es recuperarlo",
+"     Tu bienestar también es importante",
+"Una mente tranquila puede con cualquier reto",
+"Hoy también cuenta, aunque solo hayas avanzado un poco",
+"Permítete un momento de silencio, te hará bien",
+"No siempre tienes que estar al máximo, está bien bajar el ritmo",
+"Estás creciendo, aprendiendo y avanzando, aunque no siempre lo notes",
+"Cuidarte también es parte del progreso",
+"El descanso es parte del camino, no una pausa del destino",
+"Confía en que estás haciendo lo correcto",
+"A veces descansar es la mejor forma de seguir",
+"Tu esfuerzo vale, aunque nadie lo vea",
+"Cada día es una nueva oportunidad para intentarlo mejor",
+"Hablar con alguien puede ayudarte más de lo que imaginas",
+"No estás sola, siempre hay alguien dispuesto a escucharte",
+"A veces compartir lo que sientes alivia más que cualquier descanso",
+"Una buena conversación puede cambiarte el día",
+"Contar lo que te pasa no te hace débil, te hace humana",
+"No todo se soluciona en silencio, hablar también sana",
+"Buscar compañía cuando lo necesitas es una forma de cuidarte",
+"Hablar con alguien de confianza puede aclarar tu mente",
+"Las palabras compartidas alivian el corazón",
+"       No te guardes todo, hablar también libera",
+" A veces solo necesitas que alguien te escuche de verdad",
+"   Conectar con alguien puede traer calma a tu día",
+"      Tu voz también merece ser escuchada",
+" No estás sola/solo, hay personas que se preocupan por ti",
+" Compartir lo que vives hace más ligero el camino",
+" Una charla sincera puede devolverte la paz",
+" Hablar con alguien real te recuerda que no todo se resuelve sola",
+"  A veces el mejor descanso es una buena conversación",
+"  Hablar también es una forma de sanar",
+"  No tienes que cargar sola con todo lo que sientes"
+  ];
+
+  let indice = 0;
+  const texto = document.getElementById("consejo-texto");
+
+  function cambiarConsejo() {
+    texto.style.opacity = 0;
+    setTimeout(() => {
+      indice = (indice + 1) % consejos.length;
+      texto.textContent = consejos[indice];
+      texto.style.opacity = 1;
+    }, 300);
+  }
+
+  
+  setInterval(cambiarConsejo, 6000);
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+  .then(() => console.log('Service Worker registrado correctamente'))
+  .catch(err => console.log('Error al registrar Service Worker:', err));
+}
+</script>
+
+ <div class="menu">
+      <button onclick="showSection('home', event)" class="active">🏚️<span>Inicio</span></button>
+      <button onclick="showSection('alarm', event)">🕜<span>Alarmas</span></button>
+      <button onclick="showSection('events', event)">📋<span>Pendientes</span></button>
+      <button onclick="showSection('settings', event)">⚙️<span>Ayuda</span></button>
+      <button onclick="showSection('nodie', event)">🦆<span>Nodie</span></button>
+  </div>
+
+  <script>
+    function showSection(sectionId, event) {
+      // Oculta todas las secciones
+      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+
+      // Muestra la seleccionada
+      document.getElementById(sectionId).style.display = 'block';
+
+      // Quita la clase activa de todos los botones
+      document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+
+      // Añade la clase activa al botón clicado
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+  
+
+  
+</body>
+
+</html>
