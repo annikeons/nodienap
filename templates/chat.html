@@ -227,29 +227,34 @@ function addMessage(sender, message) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// ✅ Envía mensajes al servidor Flask (Python)
+
+
+
 async function sendMessage() {
-    const userMessage = document.getElementById("user-message").value;
+    // Normalizamos el mensaje del usuario: quitamos repetición de letras y convertimos a minúsculas
+    let userMessage = document.getElementById("user-message").value;
+    userMessage = userMessage.toLowerCase().replace(/(.)\1+/g, '$1'); 
     addMessage("user", userMessage);
     document.getElementById("user-message").value = "";
 
     try {
-    const formData = new FormData();
-    formData.append("user_message", userMessage);
+        const formData = new FormData();
+        formData.append("user_message", userMessage);
 
-    const response = await fetch("/get_response", {
-        method: "POST",
-        body: formData
-    });
+        const response = await fetch("/get_response", {
+            method: "POST",
+            body: formData
+        });
 
-    const data = await response.json();
-    addMessage("bot", data.bot_response);
+        const data = await response.json();
+        addMessage("bot", data.bot_response);
 
-} catch (error) {
-    console.error("Error:", error);
-    addMessage("bot", "No puedo conectarme con el servidor 😢");
+    } catch (error) {
+        console.error("Error:", error);
+        addMessage("bot", "No puedo conectarme con el servidor 😢");
+    }
 }
-}
+
 
 // ✅ Abre o cierra el chat
 let isChatOpen = false;
