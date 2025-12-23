@@ -3,7 +3,7 @@
     {
       "tag": "saludo",
       "patterns": ["hola", "hey", "buenas"],
-      "responses": ["Hola 💛", "¡Hola! ¿Cómo estás?"]
+      "responses": ["Hola 💛", "¡Qué gusto verte!"]
     },
     {
       "tag": "despedida",
