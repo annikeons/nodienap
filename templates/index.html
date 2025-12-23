@@ -38,6 +38,11 @@
 </div>
 
  
+
+
+
+
+
     <div id="alarm" class="section">
         <h1 class="wapi"> Alarmas</h1>
         <div class="alarm-container">
@@ -63,6 +68,7 @@
     </div>
 
 
+    
   
     <div id="events" class="section">
     <h1>Pendientes</h1>
@@ -398,6 +404,23 @@ if ('serviceWorker' in navigator) {
     }
   </script>
   
+
+  <script>
+ audioEnabled = false;
+
+function enableAudio() {
+    // Crea un audio temporal solo para desbloquear el permiso del navegador
+    const audio = new Audio();
+    audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        audioEnabled = true;
+        alert("Sonido activado ✅");
+    }).catch(err => {
+        console.error("No se pudo activar el audio:", err);
+    });
+}
+</script>
 
   
 </body>
