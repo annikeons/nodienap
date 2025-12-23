@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nodie</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='stylex.css') }}">
-    <link rel="shortcut icon" href="sleeper duck.png">
-<link rel="manifest" href="manifest.json">
+   <link rel="shortcut icon" href="{{ url_for('static', filename='sleeper duck.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
 <meta name="theme-color" content="#ffd500">
 
 </head>
@@ -26,21 +27,24 @@
         </div>
     </div>
     
-    <div id="nodie" class="section">
+   <div id="nodie" class="section">
     <h1 class="uwu"> Nodie</h1>
     <iframe 
-        src="chat.html" 
-        style="width:100%; height:440px; border:none; border-radius:15px;" 
-        title="Chatbot Nodie">
-    </iframe>
+    src="/chat"
+    style="width:100%; height:440px; border:none; border-radius:15px;" 
+    title="Chatbot Nodie">
+</iframe>
 
 </div>
-
 
  
     <div id="alarm" class="section">
         <h1 class="wapi"> Alarmas</h1>
         <div class="alarm-container">
+            <button onclick="enableAudio()" style="margin-bottom:10px;">
+    🔊 Activar sonido
+</button>
+
             <label>Hora:</label>
             <input type="time" id="alarmTime">
             <label>Sonido:</label>
@@ -114,6 +118,9 @@ function showSection(id){
 const themeSelect=document.getElementById('themeSelect');
 themeSelect.addEventListener('change',()=>{ document.body.classList.toggle('dark',themeSelect.value==='dark'); });
 
+
+let audioEnabled = false;
+
 let alarms=[], activeAudios={};
 const alarmList=document.getElementById('alarmList');
 
@@ -126,9 +133,26 @@ document.getElementById('addAlarm').addEventListener('click',()=>{
     alarms.push({id,time,sound,active,ringing:false});
     renderAlarms();
 });
+function enableAudio() {
+    const testAudio = new Audio(
+        "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
+    );
+    testAudio.play()
+        .then(() => {
+            audioEnabled = true;
+            alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
+        })
+        .catch(() => {
+            alert("⚠️ Toca la pantalla para habilitar el sonido");
+        });
+}
 
 function playSound(alarmId,sound){
-    // ✅ CORRECCIÓN: detener audio previo y recargar sonido nuevo
+    if (!audioEnabled) {
+        alert("🔊 Primero pulsa 'Activar sonido'");
+        return;
+    }
+
     stopAlarm(alarmId);
 
     const audio=new Audio();
@@ -142,11 +166,10 @@ function playSound(alarmId,sound){
     }
 
     audio.loop=true;
-    audio.load(); // fuerza recarga del archivo para evitar cache
     audio.play().catch(e=>console.log("Error audio:",e));
-
     activeAudios[alarmId]=audio;
 }
+
 
 function stopAlarm(alarmId){
     if(activeAudios[alarmId]){
