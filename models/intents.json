@@ -9,6 +9,15 @@
       "tag": "despedida",
       "patterns": ["adiós", "chao", "bye"],
       "responses": ["Cuídate 🦆", "Hasta luego 💫"]
-    }
+    },
+    {
+  "tag": "default",
+  "patterns": [],
+  "responses": [
+    "No estoy segura de entender, ¿me lo cuentas de otra forma? 💛",
+    "Estoy aquí para escucharte 🦆"
+  ]
+}
+
   ]
 }

@@ -23,19 +23,14 @@ def similar_text(s1, s2):
 
 def predict_intent(message):
     message = message.lower()
-    max_sim = 0
-    best_match_index = -1
 
-    for i, intent in enumerate(intents['intents']):
-        for pattern in intent['patterns']:
-            similarity = similar_text(message, pattern.lower())
-            if similarity > max_sim:
-                max_sim = similarity
-                best_match_index = i
+    for intent in intents["intents"]:
+        for pattern in intent["patterns"]:
+            if pattern in message:
+                return intent["tag"]
 
-    if best_match_index != -1:
-        return intents['intents'][best_match_index]['tag']
-    return "intencion_desconocida"
+    return "default"
+
 
 def get_response(intent):
     for item in intents['intents']:
