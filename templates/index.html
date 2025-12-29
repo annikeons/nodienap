@@ -125,9 +125,9 @@ const themeSelect=document.getElementById('themeSelect');
 themeSelect.addEventListener('change',()=>{ document.body.classList.toggle('dark',themeSelect.value==='dark'); });
 
 
+//ALARMICAS
 let audioEnabled = false;
-
-let alarms=[], activeAudios={};
+let alarms = [];
 const alarmList=document.getElementById('alarmList');
 
 document.getElementById('addAlarm').addEventListener('click',()=>{
@@ -139,6 +139,7 @@ document.getElementById('addAlarm').addEventListener('click',()=>{
     alarms.push({id,time,sound,active,ringing:false});
     renderAlarms();
 });
+
 function enableAudio() {
     const testAudio = new Audio(
         "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
@@ -152,6 +153,30 @@ function enableAudio() {
             alert("⚠️ Toca la pantalla para habilitar el sonido");
         });
 }
+
+let alarmAudio = null;
+
+function enableAudio() {
+    if (audioEnabled) return;
+
+    alarmAudio = new Audio(
+        "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
+    );
+    alarmAudio.loop = true;
+
+    alarmAudio.play()
+        .then(() => {
+            alarmAudio.pause();
+            alarmAudio.currentTime = 0;
+            audioEnabled = true;
+            alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
+        })
+        .catch(err => {
+            alert("⚠️ Pulsa el botón para habilitar el sonido");
+            console.error(err);
+        });
+}
+
 
 function playSound(alarmId,sound){
     if (!audioEnabled) {
@@ -187,7 +212,7 @@ function stopAlarm(alarmId){
 function renderAlarms(){
     alarmList.innerHTML='';
     alarms.forEach(alarm=>{
-        const div=document.createElement('div');
+        const div=document.createElement("div");
         div.className='alarm-item';
         div.style.marginBottom='10px'; // CORRECCIÓN PARA NO QUEDAR FEAS
         div.innerHTML=`
@@ -405,22 +430,7 @@ if ('serviceWorker' in navigator) {
   </script>
   
 
-  <script>
- audioEnabled = false;
 
-function enableAudio() {
-    // Crea un audio temporal solo para desbloquear el permiso del navegador
-    const audio = new Audio();
-    audio.play().then(() => {
-        audio.pause();
-        audio.currentTime = 0;
-        audioEnabled = true;
-        alert("Sonido activado ✅");
-    }).catch(err => {
-        console.error("No se pudo activar el audio:", err);
-    });
-}
-</script>
 
   
 </body>
