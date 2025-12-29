@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<div id="alarm" class="section">
+        <h1 class="wapi"> Alarmas</h1>
+        <div class="alarm-container">
+            <button onclick="enableAudio()" style="margin-bottom:10px;">
+    🔊 Activar sonido
+</button>
+
+            <label>Hora:</label>
+            <input type="time" id="alarmTime">
+            <label>Sonido:</label>
+            <select id="alarmSound">
+                <option value="sound1">Sonido 1 (elf meditation)</option>
+                <option value="sound2">Sonido 2 (forest)</option>
+                <option value="sound3">Sonido 3 (a very brady special)</option>
+                <option value="sound4">Sonido 4 (ancient wonds)</option>
+                <option value="sound5">Sonido 5 (isolation waltz)</option>
+                <option value="sound6">Sonido 6 (connecting rainbows)</option>
+            </select>
+            <label><input type="checkbox" id="alarmActive"> Activar alarma</label>
+            <button id="addAlarm">Agregar alarma</button>
+            <div class="alarm-list" id="alarmList"></div>
+        </div>
+    </div>    
+
+
+<div id="alarmMessage" style="margin-top:10px; font-weight:bold; color:#b30000;"></div>
+
+<script>
+
+function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+const themeSelect=document.getElementById('themeSelect');
+themeSelect.addEventListener('change',()=>{ document.body.classList.toggle('dark',themeSelect.value==='dark'); });
+
+
+//ALARMICAS
+let audioEnabled = false;
+let alarms = [];
+const alarmList=document.getElementById('alarmList');
+
+document.getElementById('addAlarm').addEventListener('click',()=>{
+    const time=document.getElementById('alarmTime').value;
+    const sound=document.getElementById('alarmSound').value;
+    const active=document.getElementById('alarmActive').checked;
+    if(!time) return alert("Selecciona una hora");
+    const id=Date.now();
+    alarms.push({id,time,sound,active,ringing:false});
+    renderAlarms();
+});
+
+function enableAudio() {
+    if (audioEnabled) return;
+
+    alarmAudio = new Audio("https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3");
+    alarmAudio.loop = true;
+    alarmAudio.muted = true; // 👈 CLAVE PARA ANDROID
+
+    alarmAudio.play().then(() => {
+        // Ya está desbloqueado el audio
+        alarmAudio.pause();
+        alarmAudio.currentTime = 0;
+        alarmAudio.muted = false; // 👈 se habilita el sonido real
+        audioEnabled = true;
+        alert("🔊 Sonido activado correctamente");
+    }).catch(err => {
+        console.error("Bloqueo de audio:", err);
+        alert("⚠️ Mantén pulsado el botón un momento y vuelve a intentar");
+    });
+}
+
+
+let alarmAudio = null;
+
+function enableAudio() {
+    if (audioEnabled) return;
+
+    alarmAudio = new Audio(
+        "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
+    );
+    alarmAudio.loop = true;
+
+    alarmAudio.play()
+        .then(() => {
+            alarmAudio.pause();
+            alarmAudio.currentTime = 0;
+            audioEnabled = true;
+            alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
+        })
+        .catch(err => {
+            alert("⚠️ Pulsa el botón para habilitar el sonido");
+            console.error(err);
+        });
+}
+
+
+function playSound(alarmId,sound){
+    if (!audioEnabled) {
+        alert("🔊 Primero pulsa 'Activar sonido'");
+        return;
+    }
+
+    stopAlarm(alarmId);
+
+    const audio=new Audio();
+    switch(sound){
+        case 'sound1': audio.src='https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3'; break;
+        case 'sound2': audio.src='https://freepd.com/music/Elf%20Meditation.mp3'; break;
+        case 'sound3': audio.src='https://freepd.com/music/A%20Very%20Brady%20Special.mp3'; break;
+        case 'sound4': audio.src='https://freepd.com/music/Ancient%20Winds.mp3'; break;
+        case 'sound5': audio.src='https://freepd.com/music/Isolation%20Waltz.mp3'; break;
+        case 'sound6': audio.src='https://freepd.com/music/Connecting%20Rainbows.mp3'; break;
+    }
+
+    audio.loop=true;
+    audio.play().catch(e=>console.log("Error audio:",e));
+    activeAudios[alarmId]=audio;
+}
+
+
+function stopAlarm(alarmId){
+    if(activeAudios[alarmId]){
+        activeAudios[alarmId].pause();
+        delete activeAudios[alarmId];
+    }
+}
+
+function renderAlarms(){
+    alarmList.innerHTML='';
+    alarms.forEach(alarm=>{
+        const div=document.createElement("div");
+        div.className='alarm-item';
+        div.style.marginBottom='10px'; // CORRECCIÓN PARA NO QUEDAR FEAS
+        div.innerHTML=`
+            <span>${alarm.time} - ${alarm.sound} - ${alarm.active?'Activada':'Desactivada'}</span>
+            <button onclick="removeAlarm(${alarm.id})">Quitar</button>
+            <label style="margin-left:10px;">
+                <input type="checkbox" ${alarm.active?'checked':''} onchange="toggleAlarm(${alarm.id},this.checked)">
+                Activar
+            </label>
+            <button style="margin-left:5px;" onclick="stopAlarm(${alarm.id})">Detener</button>
+        `;
+        alarmList.appendChild(div);
+    });
+}
+
+function toggleAlarm(id,status){
+    const alarm=alarms.find(a=>a.id===id);
+    if(alarm) alarm.active=status;
+    renderAlarms();
+}
+
+function removeAlarm(id){
+    alarms=alarms.filter(a=>a.id!==id);
+    stopAlarm(id);
+    renderAlarms();
+}
+
+function showAlarmMessage(msg){
+    const div=document.getElementById('alarmMessage');
+    div.style.display='block';
+    div.innerText=msg;
+    setTimeout(()=>div.style.display='none',30000); 
+}
+
+setInterval(()=>{
+    const now=new Date();
+    const currentTime=now.toTimeString().slice(0,5);
+    alarms.forEach(alarm=>{
+        if(alarm.active && alarm.time===currentTime && !alarm.ringing){
+            alarm.ringing=true;
+            playSound(alarm.id,alarm.sound);
+            showAlarmMessage(`¡Alarma!  Hora: ${alarm.time}`);
+            setTimeout(()=>alarm.ringing=false,60000);
+        }
+    });
+},1000);
+</script>
+
+
+
+</body>
+</html>

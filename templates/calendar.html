@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="events" class="section">
+    <h1>Pendientes</h1>
+    <div class="event-form">
+        <input type="text" id="eventName" placeholder="Nombre del evento">
+        <input type="time" id="eventStart" placeholder="Inicio">
+        <input type="time" id="eventEnd" placeholder="Fin">
+        <button id="addEvent">Agregar Pendiente</button>
+    </div>
+    <div class="cards" id="eventList"></div>
+</div>
+<script>
+    const eventList = document.getElementById('eventList');
+const addBtn = document.getElementById('addEvent');
+
+function loadEvents() {
+    const events = JSON.parse(localStorage.getItem('events')) || [];
+    eventList.innerHTML = ''; 
+    events.forEach((ev, index) => addEventCard(ev, index));
+}
+
+function addEventCard(ev, index) {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+        <img src="agenda.png">
+        <p>${ev.name}: ${ev.start} - ${ev.end}</p>
+        <button class="delete-btn" data-index="${index}">❎</button>
+    `;
+    eventList.appendChild(div);
+}
+
+addBtn.addEventListener('click', () => {
+    const name = document.getElementById('eventName').value.trim();
+    const start = document.getElementById('eventStart').value;
+    const end = document.getElementById('eventEnd').value;
+
+    if (!name || !start || !end) return alert("Completa todos los campos");
+
+    const events = JSON.parse(localStorage.getItem('events')) || [];
+    events.push({ name, start, end });
+    localStorage.setItem('events', JSON.stringify(events));
+
+    loadEvents();
+
+    document.getElementById('eventName').value = '';
+    document.getElementById('eventStart').value = '';
+    document.getElementById('eventEnd').value = '';
+});
+
+eventList.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('delete-btn')) return;
+    const index = e.target.getAttribute('data-index');
+    const events = JSON.parse(localStorage.getItem('events')) || [];
+    events.splice(index, 1); // eliminar evento
+    localStorage.setItem('events', JSON.stringify(events));
+    loadEvents();
+});
+
+loadEvents();
+
+</script>
+
+
+</body>
+</html>

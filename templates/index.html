@@ -37,67 +37,36 @@
 
 </div>
 
- 
+<div id="nodie" class="section">
+    <h1 class="uwu"> Alarma</h1>
+    <iframe 
+    src="/templates/alarms.html"
+    style="width:100%; height:440px; border:none; border-radius:15px;" 
+    title="Alarmas">
+</iframe>
 
-
-
-
-
-    <div id="alarm" class="section">
-        <h1 class="wapi"> Alarmas</h1>
-        <div class="alarm-container">
-            <button onclick="enableAudio()" style="margin-bottom:10px;">
-    🔊 Activar sonido
-</button>
-
-            <label>Hora:</label>
-            <input type="time" id="alarmTime">
-            <label>Sonido:</label>
-            <select id="alarmSound">
-                <option value="sound1">Sonido 1 (elf meditation)</option>
-                <option value="sound2">Sonido 2 (forest)</option>
-                <option value="sound3">Sonido 3 (a very brady special)</option>
-                <option value="sound4">Sonido 4 (ancient wonds)</option>
-                <option value="sound5">Sonido 5 (isolation waltz)</option>
-                <option value="sound6">Sonido 6 (connecting rainbows)</option>
-            </select>
-            <label><input type="checkbox" id="alarmActive"> Activar alarma</label>
-            <button id="addAlarm">Agregar alarma</button>
-            <div class="alarm-list" id="alarmList"></div>
-        </div>
-    </div>
-
-
-    
-  
-    <div id="events" class="section">
-    <h1>Pendientes</h1>
-    <div class="event-form">
-        <input type="text" id="eventName" placeholder="Nombre del evento">
-        <input type="time" id="eventStart" placeholder="Inicio">
-        <input type="time" id="eventEnd" placeholder="Fin">
-        <button id="addEvent">Agregar Pendiente</button>
-    </div>
-    <div class="cards" id="eventList"></div>
 </div>
 
+<div id="nodie" class="section">
+    <h1 class="uwu"> Eventos</h1>
+    <iframe 
+    src="/templates/calendar.html"
+    style="width:100%; height:440px; border:none; border-radius:15px;" 
+    title="calendario de eventos">
+</iframe>
 
+</div>
 
+<div id="nodie" class="section">
+    <h1 class="uwu"> Nodie</h1>
+    <iframe 
+    src="/templates/ayuda.html"
+    style="width:100%; height:440px; border:none; border-radius:15px;" 
+    title="Ayuda">
+</iframe>
 
-   
-    <div id="settings" class="section">
-        <h1></h1>
-        <div class="config-item">
-            <label>🌕Modo:⚫</label>
-            <select id="themeSelect">
-                <option value="light"> Modo Claro</option>
-                <option value="dark">Modo Oscuro</option>
-                
-            </select>
-        </div>
+</div>
 
-    </div>
-   
 </div>
 
 
@@ -112,211 +81,6 @@
 
 
 
-<div id="alarmMessage" style="margin-top:10px; font-weight:bold; color:#b30000;"></div>
-
-<script>
-
-function showSection(id){
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
-
-const themeSelect=document.getElementById('themeSelect');
-themeSelect.addEventListener('change',()=>{ document.body.classList.toggle('dark',themeSelect.value==='dark'); });
-
-
-//ALARMICAS
-let audioEnabled = false;
-let alarms = [];
-const alarmList=document.getElementById('alarmList');
-
-document.getElementById('addAlarm').addEventListener('click',()=>{
-    const time=document.getElementById('alarmTime').value;
-    const sound=document.getElementById('alarmSound').value;
-    const active=document.getElementById('alarmActive').checked;
-    if(!time) return alert("Selecciona una hora");
-    const id=Date.now();
-    alarms.push({id,time,sound,active,ringing:false});
-    renderAlarms();
-});
-
-function enableAudio() {
-    if (audioEnabled) return;
-
-    alarmAudio = new Audio("https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3");
-    alarmAudio.loop = true;
-    alarmAudio.muted = true; // 👈 CLAVE PARA ANDROID
-
-    alarmAudio.play().then(() => {
-        // Ya está desbloqueado el audio
-        alarmAudio.pause();
-        alarmAudio.currentTime = 0;
-        alarmAudio.muted = false; // 👈 se habilita el sonido real
-        audioEnabled = true;
-        alert("🔊 Sonido activado correctamente");
-    }).catch(err => {
-        console.error("Bloqueo de audio:", err);
-        alert("⚠️ Mantén pulsado el botón un momento y vuelve a intentar");
-    });
-}
-
-
-let alarmAudio = null;
-
-function enableAudio() {
-    if (audioEnabled) return;
-
-    alarmAudio = new Audio(
-        "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
-    );
-    alarmAudio.loop = true;
-
-    alarmAudio.play()
-        .then(() => {
-            alarmAudio.pause();
-            alarmAudio.currentTime = 0;
-            audioEnabled = true;
-            alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
-        })
-        .catch(err => {
-            alert("⚠️ Pulsa el botón para habilitar el sonido");
-            console.error(err);
-        });
-}
-
-
-function playSound(alarmId,sound){
-    if (!audioEnabled) {
-        alert("🔊 Primero pulsa 'Activar sonido'");
-        return;
-    }
-
-    stopAlarm(alarmId);
-
-    const audio=new Audio();
-    switch(sound){
-        case 'sound1': audio.src='https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3'; break;
-        case 'sound2': audio.src='https://freepd.com/music/Elf%20Meditation.mp3'; break;
-        case 'sound3': audio.src='https://freepd.com/music/A%20Very%20Brady%20Special.mp3'; break;
-        case 'sound4': audio.src='https://freepd.com/music/Ancient%20Winds.mp3'; break;
-        case 'sound5': audio.src='https://freepd.com/music/Isolation%20Waltz.mp3'; break;
-        case 'sound6': audio.src='https://freepd.com/music/Connecting%20Rainbows.mp3'; break;
-    }
-
-    audio.loop=true;
-    audio.play().catch(e=>console.log("Error audio:",e));
-    activeAudios[alarmId]=audio;
-}
-
-
-function stopAlarm(alarmId){
-    if(activeAudios[alarmId]){
-        activeAudios[alarmId].pause();
-        delete activeAudios[alarmId];
-    }
-}
-
-function renderAlarms(){
-    alarmList.innerHTML='';
-    alarms.forEach(alarm=>{
-        const div=document.createElement("div");
-        div.className='alarm-item';
-        div.style.marginBottom='10px'; // CORRECCIÓN PARA NO QUEDAR FEAS
-        div.innerHTML=`
-            <span>${alarm.time} - ${alarm.sound} - ${alarm.active?'Activada':'Desactivada'}</span>
-            <button onclick="removeAlarm(${alarm.id})">Quitar</button>
-            <label style="margin-left:10px;">
-                <input type="checkbox" ${alarm.active?'checked':''} onchange="toggleAlarm(${alarm.id},this.checked)">
-                Activar
-            </label>
-            <button style="margin-left:5px;" onclick="stopAlarm(${alarm.id})">Detener</button>
-        `;
-        alarmList.appendChild(div);
-    });
-}
-
-function toggleAlarm(id,status){
-    const alarm=alarms.find(a=>a.id===id);
-    if(alarm) alarm.active=status;
-    renderAlarms();
-}
-
-function removeAlarm(id){
-    alarms=alarms.filter(a=>a.id!==id);
-    stopAlarm(id);
-    renderAlarms();
-}
-
-function showAlarmMessage(msg){
-    const div=document.getElementById('alarmMessage');
-    div.style.display='block';
-    div.innerText=msg;
-    setTimeout(()=>div.style.display='none',30000); 
-}
-
-setInterval(()=>{
-    const now=new Date();
-    const currentTime=now.toTimeString().slice(0,5);
-    alarms.forEach(alarm=>{
-        if(alarm.active && alarm.time===currentTime && !alarm.ringing){
-            alarm.ringing=true;
-            playSound(alarm.id,alarm.sound);
-            showAlarmMessage(`¡Alarma!  Hora: ${alarm.time}`);
-            setTimeout(()=>alarm.ringing=false,60000);
-        }
-    });
-},1000);
-
-const eventList = document.getElementById('eventList');
-const addBtn = document.getElementById('addEvent');
-
-function loadEvents() {
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    eventList.innerHTML = ''; 
-    events.forEach((ev, index) => addEventCard(ev, index));
-}
-
-function addEventCard(ev, index) {
-    const div = document.createElement('div');
-    div.className = 'card';
-    div.innerHTML = `
-        <img src="agenda.png">
-        <p>${ev.name}: ${ev.start} - ${ev.end}</p>
-        <button class="delete-btn" data-index="${index}">❎</button>
-    `;
-    eventList.appendChild(div);
-}
-
-addBtn.addEventListener('click', () => {
-    const name = document.getElementById('eventName').value.trim();
-    const start = document.getElementById('eventStart').value;
-    const end = document.getElementById('eventEnd').value;
-
-    if (!name || !start || !end) return alert("Completa todos los campos");
-
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    events.push({ name, start, end });
-    localStorage.setItem('events', JSON.stringify(events));
-
-    loadEvents();
-
-    document.getElementById('eventName').value = '';
-    document.getElementById('eventStart').value = '';
-    document.getElementById('eventEnd').value = '';
-});
-
-eventList.addEventListener('click', (e) => {
-    if (!e.target.classList.contains('delete-btn')) return;
-    const index = e.target.getAttribute('data-index');
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    events.splice(index, 1); // eliminar evento
-    localStorage.setItem('events', JSON.stringify(events));
-    loadEvents();
-});
-
-loadEvents();
-
-</script>
 
 
 <style>
