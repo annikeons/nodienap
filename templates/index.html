@@ -141,18 +141,25 @@ document.getElementById('addAlarm').addEventListener('click',()=>{
 });
 
 function enableAudio() {
-    const testAudio = new Audio(
-        "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
-    );
-    testAudio.play()
-        .then(() => {
-            audioEnabled = true;
-            alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
-        })
-        .catch(() => {
-            alert("⚠️ Toca la pantalla para habilitar el sonido");
-        });
+    if (audioEnabled) return;
+
+    alarmAudio = new Audio("https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3");
+    alarmAudio.loop = true;
+    alarmAudio.muted = true; // 👈 CLAVE PARA ANDROID
+
+    alarmAudio.play().then(() => {
+        // Ya está desbloqueado el audio
+        alarmAudio.pause();
+        alarmAudio.currentTime = 0;
+        alarmAudio.muted = false; // 👈 se habilita el sonido real
+        audioEnabled = true;
+        alert("🔊 Sonido activado correctamente");
+    }).catch(err => {
+        console.error("Bloqueo de audio:", err);
+        alert("⚠️ Mantén pulsado el botón un momento y vuelve a intentar");
+    });
 }
+
 
 let alarmAudio = null;
 
