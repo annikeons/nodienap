@@ -1,455 +1,422 @@
  /* Reset y fuentes */
  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'nunito';
-}
-body {
-    background: linear-gradient(to bottom, #fffae3, #d0f0fd);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: background  0.3s, color 0.3s;
-}
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-family: 'nunito';
+ }
 
-.animated-text {
-    animation: moveText 3s linear infinite;
+ body {
+   background: linear-gradient(to bottom, #fffae3, #d0f0fd);
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   transition: background 0.3s, color 0.3s;
+ }
 
-}
+ .animated-text {
+   animation: moveText 3s linear infinite;
 
-@keyframes moveText {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
+ }
 
+ @keyframes moveText {
+   0% {
+     transform: translateY(0);
+   }
 
-/* Modos */
-body.dark {
-    background: linear-gradient(to bottom, #2c2b2b, #1b1b1b);
-    color: #eee;
-}
+   50% {
+     transform: translateY(-10px);
+   }
 
-/* Contenedor principal */
-.content {
-    padding: 20px;
-    flex-grow: 1;
-}
-
-/* Títulos */
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color:rgb(209, 209, 226);
-}
-
-/* Me rboé la idea de sporifai */
-.menu {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    background: #ffffffcc;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 2px solid #ffd166;
-    backdrop-filter: blur(10px);
-    
-}
-
-.menu button {
-    background: none;
-    border: none;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #555;
-    cursor: pointer;
-    transition: color 0.3s;
-    transition: all 0.25s ease-in-out;
-}
-
-.menu button:hover {
-    color: #ffb347;
-}
-
-.clancy {
-  color: rgb(162, 163, 224);
-  font-size: 29px;
-  text-align: center;
-  font-family: 'Nunito', sans-serif;
-  text-shadow: 0 0 12px rgba(162, 163, 224, 0.6);
-}
-
-.wapi{
-     text-shadow: 0 0 12px rgba(207, 207, 247, 0.6)
-}
-
-.menu button.active {
-    color: #ffb347; /* mismo tono que el hover para coherencia */
-    font-weight: bold;
-    border-top: 3px solid #ffd166; /* línea superior suave */
-    background-color: #fffaf3; /* fondo apenas cálido */
-    transition: all 0.3s ease;
-}
-
-.uwu {
-     text-shadow: 0 0 12px rgba(184, 185, 226, 0.6)
-}
-
-/* Secciones */
-.section {
-    display: none;
-    animation: fadeIn 0.5s ease;
-}
-.active {
-    display: block;
-}
-@keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
-
-/* Alarmas */
-.alarm-container {
-    max-width: 400px;
-    margin: auto;
-    background: #eee2f1;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.alarm-container label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-    color: #615648;
-}
-.alarm-container input, .alarm-container select {
-    width: 100%;
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid #e9c8ad;
-    margin-bottom: 10px;
-    outline: none;
-}
-.alarm-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #fce4f8;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-.alarm-container button:hover {
-    background-color: #caaf94;
-}
-
-/* Lista de alarmas */
-.alarm-list {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.alarm-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff3d1;
-    padding: 10px;
-    border-radius: 10px;
-}
-.alarm-item button {
-    background: #ff6b6b;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 10px;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* Consejos y Eventos */
-.cards {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: auto;
-}
-.card {
-    background:lightyellow;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    transition: transform 0.3s;
-    text-align: center;
-}
-/* Card en modo oscuro */
-body.dark .card {
-  background: rgb(86, 92, 119); /* azul grisáceo suave para modo oscuro */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  color: #e5e5e5; /* texto claro para contraste */
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .card p {
-  color: #ddd; /* texto un poco más cálido */
-}
+   100% {
+     transform: translateY(0);
+   }
+ }
 
 
-.card:hover { transform: translateY(-5px); }
-.card img { width: 50px; height: 50px; }
-.card p { font-size: 16px; color: #555; }
+ /* Modos */
+ body.dark {
+   background: linear-gradient(to bottom, #2c2b2b, #1b1b1b);
+   color: #eee;
+ }
 
-/* Eventos */
-.event-form input, .event-form button {
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid #704d97;
-    width: 100%;
-    outline: none;
-    font-family: times new roman;
-}
-.event-form button {
-    background-color: #f7dadf;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-}
-.event-form button:hover { background-color: #b3ecd6; }
+ /* Contenedor principal */
+ .content {
+   padding: 20px;
+   flex-grow: 1;
+ }
 
-/* Configuración */
-.config-item {
-    margin-bottom: 20px;
-}
-.config-item label {
-    font-weight: bold;
-}
+ /* Títulos */
+ h1 {
+   text-align: center;
+   margin-bottom: 20px;
+   color: rgb(209, 209, 226);
+ }
 
-/* Responsive */
-@media (max-width: 500px) {
-    .cards, .alarm-container, .event-form { padding: 0 10px; }
-}
+ /* Me rboé la idea de sporifai */
+ .menu {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   height: 60px;
+   background: #ffffffcc;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   border-top: 2px solid #ffd166;
+   backdrop-filter: blur(10px);
+
+ }
+
+ .menu button {
+   background: none;
+   border: none;
+   font-size: 18px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: #555;
+   cursor: pointer;
+   transition: color 0.3s;
+   transition: all 0.25s ease-in-out;
+ }
+
+ .menu button:hover {
+   color: #ffb347;
+ }
+
+ .clancy {
+   color: rgb(162, 163, 224);
+   font-size: 29px;
+   text-align: center;
+   font-family: 'Nunito', sans-serif;
+   text-shadow: 0 0 12px rgba(162, 163, 224, 0.6);
+ }
+
+ .wapi {
+   text-shadow: 0 0 12px rgba(207, 207, 247, 0.6)
+ }
+
+ .menu button.active {
+   color: #ffb347;
+   /* mismo tono que el hover para coherencia */
+   font-weight: bold;
+   border-top: 3px solid #ffd166;
+   /* línea superior suave */
+   background-color: #fffaf3;
+   /* fondo apenas cálido */
+   transition: all 0.3s ease;
+ }
+
+ .uwu {
+   text-shadow: 0 0 12px rgba(184, 185, 226, 0.6)
+ }
+
+ /* Secciones */
+ .section {
+   display: none;
+   animation: fadeIn 0.5s ease;
+ }
+
+ .active {
+   display: block;
+ }
+
+ @keyframes fadeIn {
+   from {
+     opacity: 0;
+   }
+
+   to {
+     opacity: 1;
+   }
+ }
+
+ /* Alarmas */
+ .alarm-container {
+   max-width: 400px;
+   margin: auto;
+   background: #eee2f1;
+   padding: 20px;
+   border-radius: 15px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+ }
+
+ .alarm-container label {
+   display: block;
+   margin: 10px 0 5px;
+   font-weight: bold;
+   color: #615648;
+ }
+
+ .alarm-container input,
+ .alarm-container select {
+   width: 100%;
+   padding: 8px;
+   border-radius: 8px;
+   border: 1px solid #e9c8ad;
+   margin-bottom: 10px;
+   outline: none;
+ }
+
+ .alarm-container button {
+   width: 100%;
+   padding: 10px;
+   background-color: #fce4f8;
+   border: none;
+   border-radius: 10px;
+   font-weight: bold;
+   cursor: pointer;
+   transition: background 0.3s;
+ }
+
+ .alarm-container button:hover {
+   background-color: #caaf94;
+ }
+
+ /* Lista de alarmas */
+ .alarm-list {
+   margin-top: 15px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+ }
+
+ .alarm-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background: #fff3d1;
+   padding: 10px;
+   border-radius: 10px;
+ }
+
+ .alarm-item button {
+   background: #ff6b6b;
+   border: none;
+   border-radius: 8px;
+   padding: 5px 10px;
+   color: #fff;
+   cursor: pointer;
+ }
+
+ /* Consejos y Eventos */
+ .cards {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   max-width: 500px;
+   margin: auto;
+ }
+
+ .card {
+   background: lightyellow;
+   padding: 25px;
+   border-radius: 15px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   transition: transform 0.3s;
+   text-align: center;
+ }
+
+ /* Card en modo oscuro */
+ body.dark .card {
+   background: rgb(86, 92, 119);
+   /* azul grisáceo suave para modo oscuro */
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+   color: #e5e5e5;
+   /* texto claro para contraste */
+   transition: background-color 0.3s ease, color 0.3s ease;
+ }
+
+ body.dark .card p {
+   color: #ddd;
+   /* texto un poco más cálido */
+ }
 
 
-/* Estilos responsivos */
-        @media screen and (max-width: 768px) {
-            .lower_navbar_content {
-                flex-direction: column;
-            }
+ .card:hover {
+   transform: translateY(-5px);
+ }
 
-            .lower_navbar .logo {
-                margin-bottom: 10px;
-            }
+ .card img {
+   width: 50px;
+   height: 50px;
+ }
 
-            .dropdown-menu {
-                width: 100%;
-            }
+ .card p {
+   font-size: 16px;
+   color: #555;
+ }
 
-            
-        }
-   
+ /* Eventos */
+ .event-form input,
+ .event-form button {
+   margin-bottom: 10px;
+   padding: 8px;
+   border-radius: 8px;
+   border: 1px solid #704d97;
+   width: 100%;
+   outline: none;
+   font-family: times new roman;
+ }
 
+ .event-form button {
+   background-color: #f7dadf;
+   border: none;
+   cursor: pointer;
+   font-weight: bold;
+ }
 
-        .consejo-box {
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fffefc;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  position: relative;
-  transition: all 0.5s ease;
-}
+ .event-form button:hover {
+   background-color: #b3ecd6;
+ }
 
-.consejo-box p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 15px;
-  transition: opacity 0.4s ease;
-}
+ /* Configuración */
+ .config-item {
+   margin-bottom: 20px;
+ }
 
-/* Botones */
-.consejo-controles {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
+ .config-item label {
+   font-weight: bold;
+ }
 
-.consejo-controles button {
-  background-color: #eedbad;
-  border: none;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background 0.3s;
-}
+ /* Glassmorphism and Premium Design */
+ .section {
+   background: rgba(255, 255, 255, 0.4);
+   backdrop-filter: blur(15px);
+   -webkit-backdrop-filter: blur(15px);
+   border: 1px solid rgba(255, 255, 255, 0.5);
+   border-radius: 24px;
+   padding: 25px;
+   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+   margin-bottom: 20px;
+   animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+ }
 
-.consejo-controles button:hover {
-  background-color: #ffb347;
-}
+ body.dark .section {
+   background: rgba(30, 30, 40, 0.6);
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+ }
 
-/* Responsivo */
-@media (max-width: 480px) {
-  .consejo-box {
-    padding: 15px;
-  }
-  .consejo-box {
-  display: flex;
-  justify-content: center;
-  margin: 25px auto;
-  width: 90%;
-  max-width: 500px;
-}
+ .alarm-container,
+ .card,
+ .consejo-box,
+ .event-form {
+   background: rgba(255, 255, 255, 0.7);
+   border: 1px solid rgba(255, 255, 255, 0.8);
+   border-radius: 20px;
+   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
 
-.consejo-box p {
-  font-size: 14px; /* tamaño para móvil o general según quieras */
-}
+ body.dark .alarm-container,
+ body.dark .card,
+ body.dark .consejo-box,
+ body.dark .event-form {
+   background: rgba(45, 50, 70, 0.8);
+   border: 1px solid rgba(255, 255, 255, 0.05);
+ }
 
-.consejo-card {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 100%;
-  text-align: center;
-  transition: all 0.4s ease;
-  min-height: 80px;
-}
+ .card:hover {
+   transform: translateY(-8px) scale(1.02);
+   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+ }
 
-.consejo-card p {
-  color: #333;
-  font-size: 16px;
-  margin: 0;
-  transition: opacity 0.4s ease;
-}
+ /* Premium Buttons */
+ button {
+   background: linear-gradient(135deg, #ffd166 0%, #ffb347 100%);
+   color: #4a3a1a;
+   border-radius: 12px;
+   font-weight: 700;
+   letter-spacing: 0.5px;
+   box-shadow: 0 4px 15px rgba(255, 209, 102, 0.3);
+   border: none;
+   padding: 12px 20px;
+ }
 
-/* Responsivo */
-@media (max-width: 480px) {
-  .consejo-box {
-    padding: 15px;
-  }
+ button:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 6px 20px rgba(255, 209, 102, 0.4);
+   filter: brightness(1.05);
+ }
 
-  .consejo-card {
-    padding: 15px;
-  }
+ button:active {
+   transform: translateY(0);
+ }
 
-  .consejo-card p {
-    font-size: 14px;
-  }
-}
-}
-#questions-help ul.holis {
-    list-style-type: disc;
-    padding-left: 20px;
-    color: #000; /* negro para modo claro */
-}
+ body.dark button {
+   background: linear-gradient(135deg, #373c50 0%, #2a2e40 100%);
+   color: #ffd166;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+ }
 
-body.dark #questions-help ul.holis {
-    color: #eee; /* blanco para modo oscuro */
-}
+ /* Inputs */
+ input[type="time"],
+ input[type="text"],
+ select {
+   background: rgba(255, 255, 255, 0.9);
+   border: 2px solid #f0f0f0;
+   border-radius: 12px;
+   padding: 12px;
+   transition: all 0.3s ease;
+ }
 
-/* por defecto (claro) */
-li {
-  color: #111;
-  transition: color 0.15s ease;
-}
+ input:focus,
+ select:focus {
+   border-color: #ffd166;
+   background: #fff;
+   box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.2);
+   outline: none;
+ }
 
-/* cuando el body tiene la clase .dark (modo oscuro manual) */
-body.dark li {
-  color: #f0e5e5;
-}
+ body.dark input,
+ body.dark select {
+   background: rgba(30, 35, 50, 0.9);
+   border-color: #444;
+   color: #fff;
+ }
 
+ /* Responsive */
+ @media (max-width: 500px) {
 
-/* === Modo oscuro mejorado (versión optimizada y responsiva) === */
-body.dark {
-  background: linear-gradient(to bottom, #121212, #0c0c0c);
-  color: #f2f2f2;
-  transition: background 0.3s ease, color 0.3s ease;
-}
+   .cards,
+   .alarm-container,
+   .event-form {
+     padding: 0 10px;
+   }
 
-/* Menú en modo oscuro */
-body.dark .menu {
-  background: rgba(30, 30, 30, 0.9);
-  border-top: 2px solid #333;
-}
+   .content {
+     padding: 10px;
+     padding-bottom: 90px;
+   }
 
-body.dark .menu button {
-  color: #ddd;
-}
+   iframe {
+     height: 550px !important;
+     border-radius: 20px;
+   }
+ }
 
-body.dark .menu button.active {
-  background: #ffd166;
-  color: #1a1a1a;
-  border-top: 3px solid #ffb347;
-}
+ .menu {
+   border-top: none;
+   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+ }
 
-/* Botones generales */
-button,
-select {
-  background-color: #ffd166;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
+ body.dark .menu {
+   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+ }
 
-/* Botones en modo oscuro */
-body.dark button,
-body.dark select {
-  background-color:rgb(55, 60, 80);
-  color: #ecd08e;
-  border: 1px solid #555;
-}
+ @keyframes fadeIn {
+   from {
+     opacity: 0;
+     transform: translateY(10px);
+   }
 
-body.dark button:hover {
-  background-color: #3b3b3b;
-}
-
-/* Transiciones suaves solo en elementos principales */
-body, button, select, .menu, .card {
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-/* Ajuste responsive mejorado */
-@media (max-width: 600px) {
-  .menu {
-    height: 58px;
-    font-size: 14px;
-    padding: 4px 0;
-  }
-
-  .menu button {
-    flex: 1;
-    font-size: 15px;
-    padding: 4px;
-  }
-
-  .menu button span {
-    font-size: 12px;
-  }
-
-  button, select {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-}
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }

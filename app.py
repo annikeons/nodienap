@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_cors import CORS
 import json
 import random
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 CORS(app)
 
 # Cargar intents desde la carpeta models
@@ -17,16 +18,43 @@ def index():
 def chat():
     return render_template('chat.html')
 
+@app.route('/alarms')
+def alarms():
+    return render_template('alarms.html')
+
+@app.route('/calendar')
+def calendar():
+    return render_template('calendar.html')
+
+@app.route('/ayuda')
+def ayuda():
+    return render_template('ayuda.html')
+
+@app.route('/service-worker.js')
+def service_worker():
+    return send_from_directory(
+        os.path.join(app.root_path, 'static'),
+        'service-worker.js',
+        mimetype='application/javascript'
+    )
+
 # Función de similitud simple
 def similar_text(s1, s2):
-    return sum(1 for word in s1.split() if word in s2.split()) / max(len(s1.split()), len(s2.split()))
+    w1 = s1.split()
+    w2 = s2.split()
+    if not w1 or not w2:
+        return 0.0
+    return sum(1 for word in w1 if word in w2) / max(len(w1), len(w2))
 
 def predict_intent(message):
-    message = message.lower()
+    if not message:
+        return "default"
+    
+    message = message.lower().strip()
 
-    for intent in intents["intents"]:
-        for pattern in intent["patterns"]:
-            if pattern in message:
+    for intent in intents.get("intents", []):
+        for pattern in intent.get("patterns", []):
+            if pattern.lower() in message:
                 return intent["tag"]
 
     return "default"
@@ -47,3 +75,7 @@ def get_bot_response():
     return jsonify({
         'bot_response': bot_response
     })
+
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
