@@ -119,6 +119,15 @@
 
 <script>
 
+function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+const themeSelect=document.getElementById('themeSelect');
+themeSelect.addEventListener('change',()=>{ document.body.classList.toggle('dark',themeSelect.value==='dark'); });
+
+
 (function () {
             var audioEnabled = false;
             var alarms = [];
