@@ -5,205 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nodie</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='stylex.css') }}">
-   <link rel="shortcut icon" href="{{ url_for('static', filename='sleeper duck.png') }}">
-<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-
-<meta name="theme-color" content="#ffd500">
-
+    <link rel="shortcut icon" href="{{ url_for('static', filename='sleeper duck.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#ffd500">
 </head>
 <body>
 
-
     <div class="content">
-    <div id="home" class="section active">
-        <h1 class="animated-text"> ¡Que gusto verte! </h1>
-        <p  class="clancy"> Nodie, tu pausa ideal para relajarte <br> <br>
-         </p>
-          <h1 class="animated-text"> Palabras Para Ti: </h1>
-        <div class="cards" class="consejo-box" class="consejo-card" >
-            <div class="card"><img src="{{ url_for('static', filename='sleeper duck.png') }}">
-<p id="consejo-texto">Las alarmas no solo son para cuando duermes, también cuando estás activo y quieres sonidos relajantes</p></div>
-            
+        <div id="home" class="section active">
+            <h1 class="animated-text">¡Que gusto verte!</h1>
+            <p class="clancy">Nodie, tu pausa ideal para relajarte<br><br></p>
+            <h1 class="animated-text">Palabras Para Ti:</h1>
+            <div class="cards consejo-box consejo-card">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='sleeper duck.png') }}" alt="Nodie">
+                    <p id="consejo-texto">Las alarmas no solo son para cuando duermes, también cuando estás activo y quieres sonidos relajantes</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="nodie" class="section">
+            <h1 class="uwu">Nodie</h1>
+            <iframe src="/chat" style="width:100%; height:440px; border:none; border-radius:15px;" title="Chatbot Nodie"></iframe>
+        </div>
+
+        <div id="alarm" class="section">
+            <h1 class="uwu">Alarma</h1>
+            <iframe src="/alarms" style="width:100%; height:440px; border:none; border-radius:15px;" title="Alarmas"></iframe>
+        </div>
+
+        <div id="events" class="section">
+            <h1 class="uwu">Eventos</h1>
+            <iframe src="/calendar" style="width:100%; height:440px; border:none; border-radius:15px;" title="Calendario de eventos"></iframe>
+        </div>
+
+        <div id="settings" class="section">
+            <h1 class="uwu">Ayuda</h1>
+            <iframe src="/ayuda" style="width:100%; height:440px; border:none; border-radius:15px;" title="Ayuda"></iframe>
         </div>
     </div>
-    
-   <div id="nodie" class="section">
-    <h1 class="uwu"> Nodie</h1>
-    <iframe 
-    src="/chat"
-    style="width:100%; height:440px; border:none; border-radius:15px;" 
-    title="Chatbot Nodie">
-</iframe>
 
-</div>
+    <div class="menu">
+        <button onclick="showSection('home', event)" class="active">🏚️<span>Inicio</span></button>
+        <button onclick="showSection('alarm', event)">🕜<span>Alarmas</span></button>
+        <button onclick="showSection('events', event)">📋<span>Pendientes</span></button>
+        <button onclick="showSection('settings', event)">⚙️<span>Ayuda</span></button>
+        <button onclick="showSection('nodie', event)">🦆<span>Nodie</span></button>
+    </div>
 
-<div id="nodie" class="section">
-    <h1 class="uwu"> Alarma</h1>
-    <iframe 
-    src="/templates/alarms.html"
-    style="width:100%; height:440px; border:none; border-radius:15px;" 
-    title="Alarmas">
-</iframe>
-
-</div>
-
-<div id="nodie" class="section">
-    <h1 class="uwu"> Eventos</h1>
-    <iframe 
-    src="/templates/calendar.html"
-    style="width:100%; height:440px; border:none; border-radius:15px;" 
-    title="calendario de eventos">
-</iframe>
-
-</div>
-
-<div id="nodie" class="section">
-    <h1 class="uwu"> Nodie</h1>
-    <iframe 
-    src="/templates/ayuda.html"
-    style="width:100%; height:440px; border:none; border-radius:15px;" 
-    title="Ayuda">
-</iframe>
-
-</div>
-
-</div>
-
-
-
-<div class="menu">
-    <button onclick="showSection('home')">🏚️<span>Inicio</span></button>
-    <button onclick="showSection('alarm')">🕜<span>Alarmas</span></button>
-    <button onclick="showSection('events')">📋<span>Pendientes</span></button>
-    <button onclick="showSection('settings')">⚙️<span>Ayuda</span></button>
-    <button onclick="showSection('nodie')">🦆<span>Nodie</span></button>
-</div>
-
-
-
-
-
-<style>
-    
+    <style>
         @media screen and (max-width: 768px) {
-            .lower_navbar_content {
-                flex-direction: column;
-            }
-
-            .lower_navbar .logo {
-                margin-bottom: px;
-            }
-
-            .dropdown-menu {
-                width: 100%;
-            }
-
-            
+            .lower_navbar_content { flex-direction: column; }
+            .lower_navbar .logo { margin-bottom: 10px; }
+            .dropdown-menu { width: 100%; }
         }
-</style>
-<script>
-  const consejos = [
+    </style>
 
-   "Si solo tienes 30 minutos libres, es mejor relajarte y no dormir",
-   "Si quieres chatear con Nodie, revisa *Ayuda*",
-   "Si solo tienes 30 minutos libres, es mejor relajarte y no dormir",
-"Nada se compara con contarle tu día a una persona real",
-"Evita dormir justo antes de tus actividades, podrías sentirte más cansado después",
-"Un descanso corto puede ayudarte a recuperar energía y concentración",
-"Eres valiente,lo estás haciendo bien",
-"Si te sientes agotado, una pausa breve puede marcar la diferencia",
-"Recuerda que descansar también es avanzar",
-"Tómate un momento para respirar y pensar en ti",
-"No tienes que hacerlo todo hoy, ve paso a paso",
-"Escucha a tu cuerpo, él sabe cuándo necesita un respiro",
-"A veces lo mejor que puedes hacer es detenerte un momento",
-"No se trata de hacer más, sino de hacerlo con calma",
-"Descansar no es perder el tiempo, es recuperarlo",
-"     Tu bienestar también es importante",
-"Una mente tranquila puede con cualquier reto",
-"Hoy también cuenta, aunque solo hayas avanzado un poco",
-"Permítete un momento de silencio, te hará bien",
-"No siempre tienes que estar al máximo, está bien bajar el ritmo",
-"Estás creciendo, aprendiendo y avanzando, aunque no siempre lo notes",
-"Cuidarte también es parte del progreso",
-"El descanso es parte del camino, no una pausa del destino",
-"Confía en que estás haciendo lo correcto",
-"A veces descansar es la mejor forma de seguir",
-"Tu esfuerzo vale, aunque nadie lo vea",
-"Cada día es una nueva oportunidad para intentarlo mejor",
-"Hablar con alguien puede ayudarte más de lo que imaginas",
-"No estás sola, siempre hay alguien dispuesto a escucharte",
-"A veces compartir lo que sientes alivia más que cualquier descanso",
-"Una buena conversación puede cambiarte el día",
-"Contar lo que te pasa no te hace débil, te hace humana",
-"No todo se soluciona en silencio, hablar también sana",
-"Buscar compañía cuando lo necesitas es una forma de cuidarte",
-"Hablar con alguien de confianza puede aclarar tu mente",
-"Las palabras compartidas alivian el corazón",
-"       No te guardes todo, hablar también libera",
-" A veces solo necesitas que alguien te escuche de verdad",
-"   Conectar con alguien puede traer calma a tu día",
-"      Tu voz también merece ser escuchada",
-" No estás sola/solo, hay personas que se preocupan por ti",
-" Compartir lo que vives hace más ligero el camino",
-" Una charla sincera puede devolverte la paz",
-" Hablar con alguien real te recuerda que no todo se resuelve sola",
-"  A veces el mejor descanso es una buena conversación",
-"  Hablar también es una forma de sanar",
-"  No tienes que cargar sola con todo lo que sientes"
-  ];
+    <script>
+        const consejos = [
+            "Si solo tienes 30 minutos libres, es mejor relajarte y no dormir",
+            "Si quieres chatear con Nodie, revisa *Ayuda*",
+            "Nada se compara con contarle tu día a una persona real",
+            "Evita dormir justo antes de tus actividades, podrías sentirte más cansado después",
+            "Un descanso corto puede ayudarte a recuperar energía y concentración",
+            "Eres valiente, lo estás haciendo bien",
+            "Si te sientes agotado, una pausa breve puede marcar la diferencia",
+            "Recuerda que descansar también es avanzar",
+            "Tómate un momento para respirar y pensar en ti",
+            "No tienes que hacerlo todo hoy, ve paso a paso",
+            "Escucha a tu cuerpo, él sabe cuándo necesita un respiro",
+            "A veces lo mejor que puedes hacer es detenerte un momento",
+            "No se trata de hacer más, sino de hacerlo con calma",
+            "Descansar no es perder el tiempo, es recuperarlo",
+            "Tu bienestar también es importante",
+            "Una mente tranquila puede con cualquier reto",
+            "Hoy también cuenta, aunque solo hayas avanzado un poco",
+            "Permítete un momento de silencio, te hará bien",
+            "No siempre tienes que estar al máximo, está bien bajar el ritmo",
+            "Estás creciendo, aprendiendo y avanzando, aunque no siempre lo notes",
+            "Cuidarte también es parte del progreso",
+            "El descanso es parte del camino, no una pausa del destino",
+            "Confía en que estás haciendo lo correcto",
+            "A veces descansar es la mejor forma de seguir",
+            "Tu esfuerzo vale, aunque nadie lo vea",
+            "Cada día es una nueva oportunidad para intentarlo mejor",
+            "Hablar con alguien puede ayudarte más de lo que imaginas",
+            "No estás sola, siempre hay alguien dispuesto a escucharte",
+            "A veces compartir lo que sientes alivia más que cualquier descanso",
+            "Una buena conversación puede cambiarte el día",
+            "Contar lo que te pasa no te hace débil, te hace humana",
+            "No todo se soluciona en silencio, hablar también sana",
+            "Buscar compañía cuando lo necesitas es una forma de cuidarte",
+            "Hablar con alguien de confianza puede aclarar tu mente",
+            "Las palabras compartidas alivian el corazón",
+            "No te guardes todo, hablar también libera",
+            "A veces solo necesitas que alguien te escuche de verdad",
+            "Conectar con alguien puede traer calma a tu día",
+            "Tu voz también merece ser escuchada",
+            "No estás sola/solo, hay personas que se preocupan por ti",
+            "Compartir lo que vives hace más ligero el camino",
+            "Una charla sincera puede devolverte la paz",
+            "Hablar con alguien real te recuerda que no todo se resuelve sola",
+            "A veces el mejor descanso es una buena conversación",
+            "Hablar también es una forma de sanar",
+            "No tienes que cargar sola con todo lo que sientes"
+        ];
 
-  let indice = 0;
-  const texto = document.getElementById("consejo-texto");
+        let indice = 0;
+        const textoEl = document.getElementById("consejo-texto");
 
-  function cambiarConsejo() {
-    texto.style.opacity = 0;
-    setTimeout(() => {
-      indice = (indice + 1) % consejos.length;
-      texto.textContent = consejos[indice];
-      texto.style.opacity = 1;
-    }, 300);
-  }
+        function cambiarConsejo() {
+            if (!textoEl) return;
+            textoEl.style.opacity = 0;
+            setTimeout(function() {
+                indice = (indice + 1) % consejos.length;
+                textoEl.textContent = consejos[indice];
+                textoEl.style.opacity = 1;
+            }, 300);
+        }
+        setInterval(cambiarConsejo, 6000);
+    </script>
 
-  
-  setInterval(cambiarConsejo, 6000);
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js')
-  .then(() => console.log('Service Worker registrado correctamente'))
-  .catch(err => console.log('Error al registrar Service Worker:', err));
-}
-</script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function() { console.log('Service Worker registrado'); })
+                .catch(function(err) { console.log('Error Service Worker:', err); });
+        }
+    </script>
 
- <div class="menu">
-      <button onclick="showSection('home', event)" class="active">🏚️<span>Inicio</span></button>
-      <button onclick="showSection('alarm', event)">🕜<span>Alarmas</span></button>
-      <button onclick="showSection('events', event)">📋<span>Pendientes</span></button>
-      <button onclick="showSection('settings', event)">⚙️<span>Ayuda</span></button>
-      <button onclick="showSection('nodie', event)">🦆<span>Nodie</span></button>
-  </div>
+    <script>
+        function showSection(sectionId, ev) {
+            document.querySelectorAll('.section').forEach(function(sec) {
+                sec.style.display = 'none';
+            });
+            var sec = document.getElementById(sectionId);
+            if (sec) sec.style.display = 'block';
 
-  <script>
-    function showSection(sectionId, event) {
-      // Oculta todas las secciones
-      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+            document.querySelectorAll('.menu button').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
 
-      // Muestra la seleccionada
-      document.getElementById(sectionId).style.display = 'block';
+            // Audio unlock attempt on interaction
+            unlockAudio();
+        }
 
-      // Quita la clase activa de todos los botones
-      document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+        // Global Audio Unlock
+        var audioContextUnlocked = false;
+        function unlockAudio() {
+            if (audioContextUnlocked) return;
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                const context = new AudioContext();
+                if (context.state === 'suspended') {
+                    context.resume().then(() => {
+                        audioContextUnlocked = true;
+                        notifyIframes({ type: 'audioUnlocked' });
+                    });
+                } else {
+                    audioContextUnlocked = true;
+                    notifyIframes({ type: 'audioUnlocked' });
+                }
+            }
+        }
 
-      // Añade la clase activa al botón clicado
-      event.currentTarget.classList.add('active');
-    }
-  </script>
-  
+        // Theme Sync
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'themeChange') {
+                document.body.classList.toggle('dark', event.data.theme === 'dark');
+                notifyIframes({ type: 'applyTheme', theme: event.data.theme });
+            }
+        });
 
+        function notifyIframes(data) {
+            document.querySelectorAll('iframe').forEach(function(iframe) {
+                iframe.contentWindow.postMessage(data, '*');
+            });
+        }
+    </script>
 
-
-  
 </body>
-
 </html>

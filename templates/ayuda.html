@@ -1,25 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ayuda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylex.css') }}">
 </head>
+
 <body>
-    
-<div id="settings" class="section">
-        <h1></h1>
-        <div class="config-item">
-            <label>🌕Modo:⚫</label>
-            <select id="themeSelect">
-                <option value="light"> Modo Claro</option>
-                <option value="dark">Modo Oscuro</option>
-                
+
+    <div id="settings" class="section active">
+        <h1 class="uwu">Centro de Ayuda</h1>
+
+        <div class="config-item glass-card" style="padding:15px; margin-bottom:20px;">
+            <label style="display:block; margin-bottom:10px; font-weight:bold;">🌓 Personalización:</label>
+            <select id="themeSelect" style="width:100%;">
+                <option value="light">☀️ Modo Claro</option>
+                <option value="dark">🌑 Modo Oscuro</option>
             </select>
         </div>
 
+        <div class="ayuda-content" style="text-align:left; line-height:1.6;">
+            <h3 style="color:#ffb347;">🦆 ¿Qué es Nodie?</h3>
+            <p>Nodie es tu asistente de relajación personal. Diseñado para ayudarte a tomar pausas conscientes,
+                gestionar tus pendientes y relajarte con sonidos ambientales.</p>
+
+            <h3 style="color:#ffb347; margin-top:20px;">🕜 Uso de Alarmas</h3>
+            <ul style="padding-left:20px;">
+                <li>Pulsa <strong>"Activar sonido"</strong> al entrar para habilitar el audio en tu navegador.</li>
+                <li>Elige un sonido relajante y configura la hora de tu pausa.</li>
+                <li>Recuerda que las alarmas solo suenan si la pestaña está abierta.</li>
+            </ul>
+
+            <h3 style="color:#ffb347; margin-top:20px;">💬 Hablar con Nodie</h3>
+            <p>En la pestaña <strong>"Nodie"</strong>, puedes chatear con nuestro patito relajante. Cuéntale tu día o
+                pide un consejo.</p>
+
+            <h3 style="color:#ffb347; margin-top:20px;">📋 Pendientes</h3>
+            <p>Organiza tus tareas diarias en la sección de Pendientes para que no olvides tus momentos de descanso.</p>
+
+            <div style="margin-top:30px; text-align:center; opacity:0.7; font-size:0.8rem;">
+                <p>Versión 2.0 - Hecho con 🤍 para tu bienestar</p>
+            </div>
+        </div>
     </div>
 
+    <script>
+        (function () {
+            var themeSelect = document.getElementById('themeSelect');
+            if (themeSelect) {
+                themeSelect.addEventListener('change', function () {
+                    var theme = themeSelect.value;
+                    document.body.classList.toggle('dark', theme === 'dark');
+                    // Notify parent
+                    window.parent.postMessage({ type: 'themeChange', theme: theme }, '*');
+                });
+            }
+
+            // Initial check (if parent already has theme)
+            window.addEventListener('message', function (event) {
+                if (event.data.type === 'applyTheme') {
+                    document.body.classList.toggle('dark', event.data.theme === 'dark');
+                    if (themeSelect) themeSelect.value = event.data.theme;
+                }
+            });
+        })();
+    </script>
 
 </body>
+
 </html>

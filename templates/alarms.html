@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alarmas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylex.css') }}">
 </head>
+
 <body>
-    
 
-<div id="alarm" class="section">
-        <h1 class="wapi"> Alarmas</h1>
+    <div id="alarm" class="section active">
+        <h1 class="wapi">Alarmas</h1>
         <div class="alarm-container">
-            <button onclick="enableAudio()" style="margin-bottom:10px;">
-    🔊 Activar sonido
-</button>
-
+            <button type="button" id="btnActivarSonido" style="margin-bottom:10px;">🔊 Activar sonido</button>
             <label>Hora:</label>
             <input type="time" id="alarmTime">
             <label>Sonido:</label>
@@ -22,174 +21,188 @@
                 <option value="sound1">Sonido 1 (elf meditation)</option>
                 <option value="sound2">Sonido 2 (forest)</option>
                 <option value="sound3">Sonido 3 (a very brady special)</option>
-                <option value="sound4">Sonido 4 (ancient wonds)</option>
+                <option value="sound4">Sonido 4 (ancient winds)</option>
                 <option value="sound5">Sonido 5 (isolation waltz)</option>
                 <option value="sound6">Sonido 6 (connecting rainbows)</option>
             </select>
             <label><input type="checkbox" id="alarmActive"> Activar alarma</label>
-            <button id="addAlarm">Agregar alarma</button>
+            <button type="button" id="addAlarm">Agregar alarma</button>
             <div class="alarm-list" id="alarmList"></div>
         </div>
-    </div>    
+    </div>
 
+    <div id="alarmMessage" style="margin-top:10px; font-weight:bold; color:#b30000;"></div>
 
-<div id="alarmMessage" style="margin-top:10px; font-weight:bold; color:#b30000;"></div>
+    <script>
+        (function () {
+            var audioEnabled = false;
+            var alarms = [];
+            var activeAudios = {};
+            var alarmList = document.getElementById('alarmList');
+            var btnActivar = document.getElementById('btnActivarSonido');
 
-<script>
+            // Listen for messages from parent
+            window.addEventListener('message', function (event) {
+                if (event.data.type === 'audioUnlocked') {
+                    audioEnabled = true;
+                    console.log("Audio unlocked by parent");
+                }
+                if (event.data.type === 'applyTheme') {
+                    document.body.classList.toggle('dark', event.data.theme === 'dark');
+                }
+            });
 
-function showSection(id){
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
+            document.getElementById('addAlarm').addEventListener('click', function () {
+                var time = document.getElementById('alarmTime').value;
+                var sound = document.getElementById('alarmSound').value;
+                var active = document.getElementById('alarmActive').checked;
+                if (!time) { alert("Selecciona una hora"); return; }
+                var id = Date.now();
+                alarms.push({ id: id, time: time, sound: sound, active: active, ringing: false });
+                renderAlarms();
+            });
 
-const themeSelect=document.getElementById('themeSelect');
-themeSelect.addEventListener('change',()=>{ document.body.classList.toggle('dark',themeSelect.value==='dark'); });
+            function enableAudio() {
+                if (audioEnabled) {
+                    alert("🔊 El sonido ya está activado");
+                    return;
+                }
+                var test = new Audio("https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3");
+                test.volume = 0.01;
+                test.loop = false;
+                var p = test.play();
+                if (p && typeof p.then === 'function') {
+                    p.then(function () {
+                        test.pause();
+                        test.currentTime = 0;
+                        audioEnabled = true;
+                        alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
+                    }).catch(function (err) {
+                        console.error("Audio:", err);
+                        alert("⚠️ Pulsa el botón para habilitar el sonido (los navegadores requieren interacción del usuario).");
+                    });
+                } else {
+                    audioEnabled = true;
+                    alert("🔊 Sonido activado");
+                }
+            }
 
+            btnActivar.addEventListener('click', function () { enableAudio(); });
 
-//ALARMICAS
-let audioEnabled = false;
-let alarms = [];
-const alarmList=document.getElementById('alarmList');
+            function playSound(alarmId, sound) {
+                if (!audioEnabled) {
+                    alert("🔊 Primero pulsa 'Activar sonido'");
+                    return;
+                }
+                stopAlarm(alarmId);
+                var audio = new Audio();
+                var urls = {
+                    sound1: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+                    sound2: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+                    sound3: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+                    sound4: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+                    sound5: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
+                    sound6: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3'
+                };
+                audio.src = urls[sound] || urls.sound1;
+                audio.loop = true;
+                audio.play().catch(function (e) {
+                    console.error("Error audio:", e);
+                    alert("⚠️ Error al cargar el sonido. Intenta con otro o pulsa 'Activar sonido'.");
+                });
+                activeAudios[alarmId] = audio;
+            }
 
-document.getElementById('addAlarm').addEventListener('click',()=>{
-    const time=document.getElementById('alarmTime').value;
-    const sound=document.getElementById('alarmSound').value;
-    const active=document.getElementById('alarmActive').checked;
-    if(!time) return alert("Selecciona una hora");
-    const id=Date.now();
-    alarms.push({id,time,sound,active,ringing:false});
-    renderAlarms();
-});
+            function stopAlarm(alarmId) {
+                if (activeAudios[alarmId]) {
+                    activeAudios[alarmId].pause();
+                    activeAudios[alarmId].currentTime = 0;
+                    delete activeAudios[alarmId];
+                }
+            }
 
-function enableAudio() {
-    if (audioEnabled) return;
+            function renderAlarms() {
+                alarmList.innerHTML = '';
+                alarms.forEach(function (alarm) {
+                    var div = document.createElement('div');
+                    div.className = 'alarm-item';
+                    div.style.background = alarm.ringing ? '#ffecd2' : '';
+                    div.style.border = alarm.ringing ? '2px solid #ffb347' : '1px solid rgba(0,0,0,0.05)';
 
-    alarmAudio = new Audio("https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3");
-    alarmAudio.loop = true;
-    alarmAudio.muted = true; // 👈 CLAVE PARA ANDROID
+                    var content = document.createElement('div');
+                    content.style.flex = '1';
+                    content.innerHTML = '<strong style="font-size:1.2rem; display:block;">' + alarm.time + '</strong>' +
+                        '<small style="color:#666;">' + alarm.sound + '</small>';
 
-    alarmAudio.play().then(() => {
-        // Ya está desbloqueado el audio
-        alarmAudio.pause();
-        alarmAudio.currentTime = 0;
-        alarmAudio.muted = false; // 👈 se habilita el sonido real
-        audioEnabled = true;
-        alert("🔊 Sonido activado correctamente");
-    }).catch(err => {
-        console.error("Bloqueo de audio:", err);
-        alert("⚠️ Mantén pulsado el botón un momento y vuelve a intentar");
-    });
-}
+                    var controls = document.createElement('div');
+                    controls.style.display = 'flex';
+                    controls.style.gap = '8px';
+                    controls.style.alignItems = 'center';
 
+                    var activeLabel = document.createElement('label');
+                    activeLabel.style.fontSize = '0.9rem';
+                    activeLabel.innerHTML = '<input type="checkbox" ' + (alarm.active ? 'checked' : '') + '> ' + (alarm.active ? 'On' : 'Off');
+                    activeLabel.querySelector('input').onchange = function (e) { window.toggleAlarm(alarm.id, e.target.checked); };
 
-let alarmAudio = null;
+                    var btnStop = document.createElement('button');
+                    btnStop.textContent = 'Detener';
+                    btnStop.style.background = '#ffb347';
+                    btnStop.style.display = alarm.active ? 'block' : 'none';
+                    btnStop.onclick = function () { window.stopAlarm(alarm.id); };
 
-function enableAudio() {
-    if (audioEnabled) return;
+                    var btnRemove = document.createElement('button');
+                    btnRemove.textContent = 'Quitar';
+                    btnRemove.style.background = '#ff6b6b';
+                    btnRemove.onclick = function () { window.removeAlarm(alarm.id); };
 
-    alarmAudio = new Audio(
-        "https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3"
-    );
-    alarmAudio.loop = true;
+                    controls.appendChild(activeLabel);
+                    if (alarm.ringing) controls.appendChild(btnStop);
+                    controls.appendChild(btnRemove);
 
-    alarmAudio.play()
-        .then(() => {
-            alarmAudio.pause();
-            alarmAudio.currentTime = 0;
-            audioEnabled = true;
-            alert("🔊 Sonido activado. Las alarmas ya pueden sonar.");
-        })
-        .catch(err => {
-            alert("⚠️ Pulsa el botón para habilitar el sonido");
-            console.error(err);
-        });
-}
+                    div.appendChild(content);
+                    div.appendChild(controls);
+                    alarmList.appendChild(div);
+                });
+            }
 
+            function toggleAlarm(id, status) {
+                var a = alarms.filter(function (x) { return x.id === id; })[0];
+                if (a) a.active = status;
+                renderAlarms();
+            }
 
-function playSound(alarmId,sound){
-    if (!audioEnabled) {
-        alert("🔊 Primero pulsa 'Activar sonido'");
-        return;
-    }
+            function removeAlarm(id) {
+                alarms = alarms.filter(function (a) { return a.id !== id; });
+                stopAlarm(id);
+                renderAlarms();
+            }
 
-    stopAlarm(alarmId);
+            window.toggleAlarm = toggleAlarm;
+            window.removeAlarm = removeAlarm;
+            window.stopAlarm = stopAlarm;
 
-    const audio=new Audio();
-    switch(sound){
-        case 'sound1': audio.src='https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3'; break;
-        case 'sound2': audio.src='https://freepd.com/music/Elf%20Meditation.mp3'; break;
-        case 'sound3': audio.src='https://freepd.com/music/A%20Very%20Brady%20Special.mp3'; break;
-        case 'sound4': audio.src='https://freepd.com/music/Ancient%20Winds.mp3'; break;
-        case 'sound5': audio.src='https://freepd.com/music/Isolation%20Waltz.mp3'; break;
-        case 'sound6': audio.src='https://freepd.com/music/Connecting%20Rainbows.mp3'; break;
-    }
+            function showAlarmMessage(msg) {
+                var div = document.getElementById('alarmMessage');
+                div.style.display = 'block';
+                div.innerText = msg;
+                setTimeout(function () { div.style.display = 'none'; }, 30000);
+            }
 
-    audio.loop=true;
-    audio.play().catch(e=>console.log("Error audio:",e));
-    activeAudios[alarmId]=audio;
-}
-
-
-function stopAlarm(alarmId){
-    if(activeAudios[alarmId]){
-        activeAudios[alarmId].pause();
-        delete activeAudios[alarmId];
-    }
-}
-
-function renderAlarms(){
-    alarmList.innerHTML='';
-    alarms.forEach(alarm=>{
-        const div=document.createElement("div");
-        div.className='alarm-item';
-        div.style.marginBottom='10px'; // CORRECCIÓN PARA NO QUEDAR FEAS
-        div.innerHTML=`
-            <span>${alarm.time} - ${alarm.sound} - ${alarm.active?'Activada':'Desactivada'}</span>
-            <button onclick="removeAlarm(${alarm.id})">Quitar</button>
-            <label style="margin-left:10px;">
-                <input type="checkbox" ${alarm.active?'checked':''} onchange="toggleAlarm(${alarm.id},this.checked)">
-                Activar
-            </label>
-            <button style="margin-left:5px;" onclick="stopAlarm(${alarm.id})">Detener</button>
-        `;
-        alarmList.appendChild(div);
-    });
-}
-
-function toggleAlarm(id,status){
-    const alarm=alarms.find(a=>a.id===id);
-    if(alarm) alarm.active=status;
-    renderAlarms();
-}
-
-function removeAlarm(id){
-    alarms=alarms.filter(a=>a.id!==id);
-    stopAlarm(id);
-    renderAlarms();
-}
-
-function showAlarmMessage(msg){
-    const div=document.getElementById('alarmMessage');
-    div.style.display='block';
-    div.innerText=msg;
-    setTimeout(()=>div.style.display='none',30000); 
-}
-
-setInterval(()=>{
-    const now=new Date();
-    const currentTime=now.toTimeString().slice(0,5);
-    alarms.forEach(alarm=>{
-        if(alarm.active && alarm.time===currentTime && !alarm.ringing){
-            alarm.ringing=true;
-            playSound(alarm.id,alarm.sound);
-            showAlarmMessage(`¡Alarma!  Hora: ${alarm.time}`);
-            setTimeout(()=>alarm.ringing=false,60000);
-        }
-    });
-},1000);
-</script>
-
-
+            setInterval(function () {
+                var now = new Date();
+                var currentTime = now.toTimeString().slice(0, 5);
+                alarms.forEach(function (alarm) {
+                    if (alarm.active && alarm.time === currentTime && !alarm.ringing) {
+                        alarm.ringing = true;
+                        playSound(alarm.id, alarm.sound);
+                        showAlarmMessage("¡Alarma! Hora: " + alarm.time);
+                        setTimeout(function () { alarm.ringing = false; }, 60000);
+                    }
+                });
+            }, 1000);
+        })();
+    </script>
 
 </body>
+
 </html>

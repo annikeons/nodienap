@@ -1,74 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pendientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylex.css') }}">
 </head>
+
 <body>
-    
-<div id="events" class="section">
-    <h1>Pendientes</h1>
-    <div class="event-form">
-        <input type="text" id="eventName" placeholder="Nombre del evento">
-        <input type="time" id="eventStart" placeholder="Inicio">
-        <input type="time" id="eventEnd" placeholder="Fin">
-        <button id="addEvent">Agregar Pendiente</button>
+
+    <div id="events" class="section active">
+        <h1>Pendientes</h1>
+        <div class="event-form">
+            <input type="text" id="eventName" placeholder="Nombre del evento">
+            <input type="time" id="eventStart" placeholder="Inicio">
+            <input type="time" id="eventEnd" placeholder="Fin">
+            <button type="button" id="addEvent">Agregar Pendiente</button>
+        </div>
+        <div class="cards" id="eventList"></div>
     </div>
-    <div class="cards" id="eventList"></div>
-</div>
-<script>
-    const eventList = document.getElementById('eventList');
-const addBtn = document.getElementById('addEvent');
 
-function loadEvents() {
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    eventList.innerHTML = ''; 
-    events.forEach((ev, index) => addEventCard(ev, index));
-}
+    <script>
+        (function () {
+            // Theme sync listener
+            window.addEventListener('message', function (event) {
+                if (event.data.type === 'applyTheme') {
+                    document.body.classList.toggle('dark', event.data.theme === 'dark');
+                }
+            });
 
-function addEventCard(ev, index) {
-    const div = document.createElement('div');
-    div.className = 'card';
-    div.innerHTML = `
-        <img src="agenda.png">
-        <p>${ev.name}: ${ev.start} - ${ev.end}</p>
-        <button class="delete-btn" data-index="${index}">❎</button>
-    `;
-    eventList.appendChild(div);
-}
+            var eventList = document.getElementById('eventList');
+            var addBtn = document.getElementById('addEvent');
 
-addBtn.addEventListener('click', () => {
-    const name = document.getElementById('eventName').value.trim();
-    const start = document.getElementById('eventStart').value;
-    const end = document.getElementById('eventEnd').value;
+            function loadEvents() {
+                var events = JSON.parse(localStorage.getItem('events') || '[]');
+                eventList.innerHTML = '';
+                events.forEach(function (ev, index) {
+                    var div = document.createElement('div');
+                    div.className = 'card';
+                    div.style.marginBottom = '15px';
+                    div.style.padding = '20px';
+                    div.style.display = 'flex';
+                    div.style.alignItems = 'center';
+                    div.style.justifyContent = 'space-between';
+                    div.style.background = 'rgba(255, 255, 255, 0.8)';
+                    div.style.borderRadius = '16px';
 
-    if (!name || !start || !end) return alert("Completa todos los campos");
+                    var info = document.createElement('div');
+                    info.style.display = 'flex';
+                    info.style.alignItems = 'center';
+                    info.style.gap = '15px';
+                    info.innerHTML = '<img src="' + "{{ url_for('static', filename='agenda.png') }}" + '" style="width:40px; height:40px;">' +
+                        '<div><strong style="display:block; font-size:1.1rem;">' + ev.name + '</strong>' +
+                        '<span style="color:#666; font-size:0.9rem;">' + ev.start + ' - ' + ev.end + '</span></div>';
 
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    events.push({ name, start, end });
-    localStorage.setItem('events', JSON.stringify(events));
+                    var btnDelete = document.createElement('button');
+                    btnDelete.innerHTML = '❎';
+                    btnDelete.className = 'delete-btn';
+                    btnDelete.dataset.index = index;
+                    btnDelete.style.background = 'transparent';
+                    btnDelete.style.boxShadow = 'none';
+                    btnDelete.style.fontSize = '1.2rem';
+                    btnDelete.style.padding = '5px';
 
-    loadEvents();
+                    div.appendChild(info);
+                    div.appendChild(btnDelete);
+                    eventList.appendChild(div);
+                });
+            }
 
-    document.getElementById('eventName').value = '';
-    document.getElementById('eventStart').value = '';
-    document.getElementById('eventEnd').value = '';
-});
+            addBtn.addEventListener('click', function () {
+                var name = document.getElementById('eventName').value.trim();
+                var start = document.getElementById('eventStart').value;
+                var end = document.getElementById('eventEnd').value;
+                if (!name || !start || !end) { alert("Completa todos los campos"); return; }
+                var events = JSON.parse(localStorage.getItem('events') || '[]');
+                events.push({ name: name, start: start, end: end });
+                localStorage.setItem('events', JSON.stringify(events));
+                loadEvents();
+                document.getElementById('eventName').value = '';
+                document.getElementById('eventStart').value = '';
+                document.getElementById('eventEnd').value = '';
+            });
 
-eventList.addEventListener('click', (e) => {
-    if (!e.target.classList.contains('delete-btn')) return;
-    const index = e.target.getAttribute('data-index');
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    events.splice(index, 1); // eliminar evento
-    localStorage.setItem('events', JSON.stringify(events));
-    loadEvents();
-});
+            eventList.addEventListener('click', function (e) {
+                if (!e.target.classList.contains('delete-btn')) return;
+                var index = parseInt(e.target.getAttribute('data-index'), 10);
+                var events = JSON.parse(localStorage.getItem('events') || '[]');
+                events.splice(index, 1);
+                localStorage.setItem('events', JSON.stringify(events));
+                loadEvents();
+            });
 
-loadEvents();
-
-</script>
-
+            loadEvents();
+        })();
+    </script>
 
 </body>
+
 </html>
