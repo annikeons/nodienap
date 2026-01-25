@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <script src="https://unpkg.com/compromise"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='sleeper duck.png') }}">
 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='sleeper duck.png') }}">
+    
 
 
     <meta charset="UTF-8">
-
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Nodie</title>
     <style>
-        /* formato a la interfaz del chat */
+
+ /* formato a la interfaz del chat */
         body {
             font-family: quicksand;
-            margin: 0;
-            transition: background 0.3s, color 0.3s;
+            margin: 0; 
         }
-
-        body.dark {
-            background-color: #1a1a1a;
-            color: #eee;
-        }
-
         .chat-icon {
             position: fixed;
             bottom: 20px;
             right: 20px;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            z-index: 1001;
+            width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            z-index: 1001; 
         }
-
         .chat-container {
             width: 360px;
             margin: 0 auto;
@@ -45,79 +38,70 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             height: 360px;
-            overflow-y: auto;
+            overflow-y: auto; 
             position: fixed;
             bottom: 20px;
-            right: 80px;
-            display: none;
-            z-index: 1000;
-
-            background-image: url("{{ url_for('static', filename='fondii.jpeg') }}");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+            right: 80px; 
+            display: none; 
+            z-index: 1000; 
+            
+             background-image: url(fondii.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
         }
 
         @media screen and (max-width: 767px) {
-            .chat-container {
-                width: 70%;
-                margin: 0 auto;
-                right: auto;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
+    .chat-container {
+        width: 70%;
+        margin: 0 auto;
+        right: auto;
+        left: 50%; 
+        transform: translateX(-50%);
+    }
+}
 
 
 
         .chat-header {
             text-align: center;
             margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px; 
+            border-bottom: 1px solid #ccc; 
         }
-
         .chat-box {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
-            max-height: calc(100% - 60px);
-            box-sizing: border-box;
-            overflow-y: auto;
+            max-height: calc(100% - 60px); 
+            box-sizing: border-box; 
+            overflow-y: auto; 
         }
-
         .user-message {
             text-align: right;
-            color: lightcyan;
+            color:lightcyan;
         }
-
         .bot-message {
             text-align: left;
-            color: moccasin;
+            color:moccasin;
         }
-
         #chat-form {
-            margin-top: 10px;
-            display: flex;
+            margin-top: 10px; 
+            display: flex; 
         }
-
         #user-message {
-            flex: 1;
+            flex: 1; 
         }
-
         #chat-form button {
-            margin-left: 10px;
+            margin-left: 10px; 
         }
-
         .imagen-redonda {
             border-radius: 50%;
         }
-
         .chat-bot {
             color: white;
             background-color: black;
         }
-
         .btn-enviar {
             background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
             -webkit-border-radius: 28;
@@ -133,7 +117,6 @@
             padding: 12px;
             text-decoration: none;
         }
-
         .btn-mensaje {
             -webkit-border-radius: 28;
             -moz-border-radius: 28;
@@ -159,208 +142,186 @@
                 width: 100%;
             }
 
-
+            
         }
     </style>
-    <script>
-        window.addEventListener('message', function (event) {
-            if (event.data.type === 'applyTheme') {
-                document.body.classList.toggle('dark', event.data.theme === 'dark');
-            }
-        });
-    </script>
 </head>
-
 <body>
-
+  
     <section>
         <header>
-
-            <div class="header-title">
-                <div id="main-title" class="animated-text" style="color:black;">Habla con Nodie <br>Seguro tiene algo
-                    lindo que decirte</div>
-                <div id="sub-title"></div>
-                <div id="search-bar">
-                </div>
-                <div id="title-button"><a href=""><i class="fas fa-chevron-down fa-2x"></i></a></div>
-            </div>
-        </header>
-    </section>
-    <section class="chat-bot">
-        <img class="chat-icon" src="{{ url_for('static', filename='sleeper duck.png') }}" alt="Icono de Chat"
-            onclick="toggleChat()">
-
-        <div class="chat-container" id="chat-container">
-            <div class="chat-header">
-                <h2>Nodie <br> <img src="{{ url_for('static', filename='sleeper duck.png') }}" width="55" height="55"
-                        class="imagen-redonda" alt=""> </h2>
-            </div>
-            <div class="chat-box" id="chat-box">
-            </div>
-            <form id="chat-form" onsubmit="sendMessage(); return false;">
-                <input class="btn-mensaje" type="text" id="user-message" name="user_message"
-                    placeholder="Escribe un mensaje..." autocomplete="off" required>
-                <button class="btn-enviar" type="button" onclick="sendMessage()">Enviar</button>
-
-            </form>
+            
+        <div class="header-title">
+          <div id="main-title" class="animated-text" style="color:black;">Habla con Nodie <br>Seguro tiene algo lindo que decirte</div>
+          <div id="sub-title"></div>
+          <div id="search-bar">
+          </div>
+          <div id="title-button"><a href=""><i class="fas fa-chevron-down fa-2x"></i></a></div>
         </div>
-    </section>
+    </header>
+</section>
+<section>
+    
+                          
+                          <script>
+                              document.getElementById("preguntasBtn").addEventListener("click", function() {
+                                  var preguntas = document.querySelector(".holis");
+                                  preguntas.style.display = (preguntas.style.display === "none") ? "block" : "none";
+                              });
+                          </script>
+
+
+    
+<section class="chat-bot">
+  <img class="chat-icon" src="{{ url_for('static', filename='sleeper duck.png') }}" alt="Icono de Chat" onclick="toggleChat()">
+
+  <div class="chat-container" id="chat-container">
+      <div class="chat-header">
+          <h2>Nodie <BR> <img src="{{ url_for('static', filename='sleeper duck.png') }}" width="55" height="55" class="imagen-redonda"> </h2>
+      </div>
+      <div class="chat-box" id="chat-box">
+      </div>
+      <form id="chat-form" onsubmit="sendMessage(); return false;">
+          <input class="btn-mensaje" type="text" id="user-message" name="user_message" placeholder="Escribe un mensaje..." autocomplete="off" required>
+          <button class="btn-enviar" type="button" onclick="sendMessage()">Enviar</button> 
+          
+      </form>
+  </div>
+</section>
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://unpkg.com/unidecode@1.0.23/lib/unidecode.js"></script>
 
 
 
-    <script>
-        // ✅ Muestra mensajes en el chat (usuario y bot)
-        function addMessage(sender, message) {
-            const chatBox = document.getElementById("chat-box");
-            const messageDiv = document.createElement("div");
-            messageDiv.className = sender + "-message";
-            messageDiv.style.margin = "10px 0";
-            messageDiv.style.padding = "10px 15px";
-            messageDiv.style.borderRadius = "15px";
-            messageDiv.style.maxWidth = "80%";
-            messageDiv.style.width = "fit-content";
-            messageDiv.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+<script>
+  // ✅ Muestra mensajes en el chat (usuario y bot)
+function addMessage(sender, message) {
+    const chatBox = document.getElementById("chat-box");
+    const messageDiv = document.createElement("div");
+    messageDiv.className = sender + "-message";
 
-            if (sender === "user") {
-                messageDiv.style.backgroundColor = "rgba(173, 216, 230, 0.8)";
-                messageDiv.style.marginLeft = "auto";
-                messageDiv.style.color = "#004d4d";
-            } else {
-                messageDiv.style.backgroundColor = "rgba(255, 222, 173, 0.8)";
-                messageDiv.style.marginRight = "auto";
-                messageDiv.style.color = "#4d3a1a";
+    if (typeof message === 'object' && 'text' in message && 'link_url' in message) {
+        const link = document.createElement("a");
+        link.href = message.link_url;
+        link.textContent = sender === "user" ? "Tú: Link" : "Nodie: Link";
+        link.target = "_blank";
+
+        const text = document.createElement("p");
+        text.textContent = sender === "user" ? "Tú: " + message.text : "Nodie: " + message.text;
+
+        messageDiv.appendChild(text);
+        messageDiv.appendChild(link);
+    } else if (typeof message === "string" && message.startsWith("data:image")) {
+        const image = document.createElement("img");
+        image.src = message;
+        messageDiv.appendChild(image);
+    } else {
+        messageDiv.textContent = sender === "user" ? "Tú: " + message : "Nodie : " + message;
+    }
+
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+
+
+async function sendMessage() {
+    // Normalizamos el mensaje del usuario: quitamos repetición de letras y convertimos a minúsculas
+    let userMessage = document.getElementById("user-message").value;
+    userMessage = userMessage.toLowerCase().replace(/(.)\1+/g, '$1'); 
+    addMessage("user", userMessage);
+    document.getElementById("user-message").value = "";
+
+    try {
+        const formData = new FormData();
+        formData.append("user_message", userMessage);
+
+        const response = await fetch("/get_response", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        addMessage("bot", data.bot_response);
+
+    } catch (error) {
+        console.error("Error:", error);
+        addMessage("bot", "No puedo conectarme con el servidor 😢");
+    }
+}
+
+
+// ✅ Abre o cierra el chat
+let isChatOpen = false;
+function toggleChat() {
+    const chatContainer = document.getElementById("chat-container");
+    const chatIcon = document.querySelector(".chat-icon");
+
+    if (!isChatOpen) {
+        chatContainer.style.display = "block";
+        chatIcon.style.transform = "rotate(45deg)";
+    } else {
+        chatContainer.style.display = "none";
+        chatIcon.style.transform = "";
+    }
+
+    isChatOpen = !isChatOpen;
+}
+
+// ✅ Función auxiliar (si la usas en otras partes)
+function similarText(first, second) {
+    first = first || "";
+    second = second || "";
+    let pos1 = 0,
+        pos2 = 0,
+        max = 0,
+        firstLength = first.length,
+        secondLength = second.length,
+        p, q, l, sum;
+
+    for (p = 0; p < firstLength; p++) {
+        for (q = 0; q < secondLength; q++) {
+            for (l = 0;
+                (p + l < firstLength) &&
+                (q + l < secondLength) &&
+                (first.charAt(p + l) === second.charAt(q + l)); l++);
+            if (1 > max) {
+                max = 1;
+                pos1 = p;
+                pos2 = q;
             }
+        }
+    }
 
-            if (typeof message === 'object' && 'text' in message && 'link_url' in message) {
-                const link = document.createElement("a");
-                link.href = message.link_url;
-                link.textContent = "Ver recurso";
-                link.target = "_blank";
-                link.style.display = "block";
-                link.style.color = "#007bff";
+    sum = max;
 
-                const text = document.createElement("p");
-                text.textContent = message.text;
-                text.style.margin = "0 0 5px 0";
-
-                messageDiv.appendChild(text);
-                messageDiv.appendChild(link);
-            } else if (typeof message === "string" && message.startsWith("data:image")) {
-                const image = document.createElement("img");
-                image.src = message;
-                image.style.maxWidth = "100%";
-                image.style.borderRadius = "10px";
-                messageDiv.appendChild(image);
-            } else {
-                messageDiv.textContent = message;
-            }
-
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
+    if (sum) {
+        if (pos1 && pos2) {
+            sum += similarText(first.substr(0, pos2), second.substr(0, pos2));
         }
 
-
-
-
-        async function sendMessage() {
-            // Normalizamos el mensaje del usuario: quitamos repetición de letras, acentos y convertimos a minúsculas
-            let userMessage = document.getElementById("user-message").value;
-            userMessage = userMessage.toLowerCase()
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Quitar acentos nativamente
-                .replace(/(.)\1+/g, '$1');
-            addMessage("user", userMessage);
-            document.getElementById("user-message").value = "";
-
-            try {
-                const formData = new FormData();
-                formData.append("user_message", userMessage);
-
-                const response = await fetch("/get_response", {
-                    method: "POST",
-                    body: formData
-                });
-
-                const data = await response.json();
-                addMessage("bot", data.bot_response);
-
-            } catch (error) {
-                console.error("Error:", error);
-                addMessage("bot", "No puedo conectarme con el servidor 😢");
-            }
+        if ((pos1 + max < firstLength) && (pos2 + max < secondLength)) {
+            sum += similarText(
+                first.substr(pos1 + max, firstLength - pos1 - max),
+                second.substr(pos2 + max, secondLength - pos2 - max)
+            );
         }
+    }
 
+    return sum;
+}
 
-        // Abre o cierra el chat
-        let isChatOpen = false;
-        function toggleChat() {
-            const chatContainer = document.getElementById("chat-container");
-            const chatIcon = document.querySelector(".chat-icon");
+// ✅ Solo imprime en consola (opcional)
+function manageModelVersions() {
+    console.log("Gestionando versiones del modelo...");
+}
 
-            if (!isChatOpen) {
-                chatContainer.style.display = "block";
-                chatIcon.style.transform = "rotate(45deg)";
-            } else {
-                chatContainer.style.display = "none";
-                chatIcon.style.transform = "";
-            }
-
-            isChatOpen = !isChatOpen;
-        }
-
-        // Función auxiliar (si la usas en otras partes)
-        function similarText(first, second) {
-            first = first || "";
-            second = second || "";
-            let pos1 = 0,
-                pos2 = 0,
-                max = 0,
-                firstLength = first.length,
-                secondLength = second.length,
-                p, q, l, sum;
-
-            for (p = 0; p < firstLength; p++) {
-                for (q = 0; q < secondLength; q++) {
-                    for (l = 0;
-                        (p + l < firstLength) &&
-                        (q + l < secondLength) &&
-                        (first.charAt(p + l) === second.charAt(q + l)); l++);
-                    if (1 > max) {
-                        max = 1;
-                        pos1 = p;
-                        pos2 = q;
-                    }
-                }
-            }
-
-            sum = max;
-
-            if (sum) {
-                if (pos1 && pos2) {
-                    sum += similarText(first.substr(0, pos2), second.substr(0, pos2));
-                }
-
-                if ((pos1 + max < firstLength) && (pos2 + max < secondLength)) {
-                    sum += similarText(
-                        first.substr(pos1 + max, firstLength - pos1 - max),
-                        second.substr(pos2 + max, secondLength - pos2 - max)
-                    );
-                }
-            }
-
-            return sum;
-        }
-
-        // Solo imprime en consola (opcional)
-        function manageModelVersions() {
-            console.log("Gestionando versiones del modelo...");
-        }
-
-    </script>
+</script>
 
 
 
@@ -368,5 +329,4 @@
 
 
 </body>
-
 </html>
