@@ -18,12 +18,12 @@
             <input type="time" id="alarmTime">
             <label>Sonido:</label>
             <select id="alarmSound">
-                <option value="sound1">Sonido 1 (llulaby)</option>
-                <option value="sound2">Sonido 2 (forest)</option>
-                <option value="sound3">Sonido 3 (a very brady special)</option>
-                <option value="sound4">Sonido 4 (ancient winds)</option>
-                <option value="sound5">Sonido 5 (isolation waltz)</option>
-                <option value="sound6">Sonido 6 (connecting rainbows)</option>
+                <option value="sound1">Sonido 1 (Ambient relax)</option>
+                <option value="sound2">Sonido 2 (Meditation)</option>
+                <option value="sound3">Sonido 3 (Sleep meditation music)</option>
+                <option value="sound4">Sonido 4 (Instrumental llulaby)</option>
+                <option value="sound5">Sonido 5 (Relaxing Synth Harmonies)</option>
+                <option value="sound6">Sonido 6 (Deep ambient)</option>
             </select>
             <label><input type="checkbox" id="alarmActive"> Activar alarma</label>
             <button type="button" id="addAlarm">Agregar alarma</button>
@@ -67,7 +67,7 @@
                     alert("🔊 El sonido ya está activado");
                     return;
                 }
-                var test = new Audio("https://freepd.com/music/Wind%20of%20the%20Rainforest.mp3");
+                var test = new Audio("");
                 test.volume = 0.01;
                 test.loop = false;
                 var p = test.play();
@@ -97,12 +97,12 @@
                 stopAlarm(alarmId);
                 var audio = new Audio();
                 var urls = {
-                    sound1: 'https://pixabay.com/es/music/cl%c3%a1sico-moderno-kaijin-sea-god-465195/',
-                    sound2: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-                    sound3: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-                    sound4: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-                    sound5: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
-                    sound6: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3'
+                    sound1: 'https://orangefreesounds.com/wp-content/uploads/2023/01/Ambient-relaxing-music.mp3',
+                    sound2: 'https://www.orangefreesounds.com/wp-content/uploads/2020/07/Free-meditation-music.mp3',
+                    sound3: 'https://orangefreesounds.com/wp-content/uploads/2023/01/Sleep-meditation-music-free.mp3',
+                    sound4: 'https://orangefreesounds.com/wp-content/uploads/2023/07/Free-instrumental-lullaby-music.mp3',
+                    sound5: 'https://orangefreesounds.com/wp-content/uploads/2024/01/Relaxing-synth-harmonies.mp3',
+                    sound6: 'https://www.orangefreesounds.com/wp-content/uploads/2020/11/Deep-ambient-music.mp3'
                 };
                 audio.src = urls[sound] || urls.sound1;
                 audio.loop = true;
