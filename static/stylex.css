@@ -491,3 +491,54 @@
     height: 65px;
   }
 }
+
+
+/* ===== FIX MOBILE LAYOUT ===== */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.content {
+  padding-bottom: 90px; /* espacio REAL para el menú */
+}
+
+/* Iframes bien controlados */
+iframe {
+  width: 100%;
+  height: 440px;
+  border: none;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+/* Menú inferior fijo */
+.menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Ajuste móvil */
+@media (max-width: 600px) {
+  iframe {
+    height: 65vh;
+    min-height: 360px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .cards {
+    margin-bottom: 20px;
+  }
+}
