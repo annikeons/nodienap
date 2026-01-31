@@ -422,12 +422,7 @@
      transform: translateY(0);
    }
  }
- /* 🔒 OVERRIDE MENÚ INFERIOR */
 .menu {
-  height: auto !important;
-  min-height: 60px;
-}
-
-.menu button {
-  padding: 6px 0 !important;
+  background: red !important;
+  height: 200px !important;
 }
