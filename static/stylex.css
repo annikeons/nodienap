@@ -43,7 +43,7 @@
 
  /* Contenedor principal */
  .content {
-   padding: 20px;
+   padding: 15px;
    flex-grow: 1;
  }
 
@@ -59,7 +59,7 @@
    position: fixed;
    bottom: 0;
    width: 100%;
-   height: 60px;
+   height: 40px;
    background: #ffffffcc;
    display: flex;
    justify-content: space-around;
@@ -135,10 +135,10 @@
 
  /* Alarmas */
  .alarm-container {
-   max-width: 400px;
+   max-width: 552px;
    margin: auto;
    background: #eee2f1;
-   padding: 20px;
+   padding: 15px;
    border-radius: 15px;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
  }
@@ -291,7 +291,7 @@
    -webkit-backdrop-filter: blur(15px);
    border: 1px solid rgba(255, 255, 255, 0.5);
    border-radius: 24px;
-   padding: 25px;
+   padding: 18px;
    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
    margin-bottom: 20px;
    animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -331,11 +331,11 @@
    background: linear-gradient(135deg, #ffd166 0%, #ffb347 100%);
    color: #4a3a1a;
    border-radius: 12px;
-   font-weight: 700;
+   font-weight: 650;
    letter-spacing: 0.5px;
    box-shadow: 0 4px 15px rgba(255, 209, 102, 0.3);
    border: none;
-   padding: 12px 20px;
+   padding: 10px 18px;
  }
 
  button:hover {
@@ -381,7 +381,7 @@
  }
 
  /* Responsive */
- @media (max-width: 500px) {
+ @media (max-width: 552px) {
 
    .cards,
    .alarm-container,
@@ -391,22 +391,22 @@
 
    .content {
      padding: 10px;
-     padding-bottom: 90px;
+     padding-bottom: 40px;
    }
 
    iframe {
      height: 550px !important;
-     border-radius: 20px;
+     border-radius: 40px;
    }
  }
 
  .menu {
    border-top: none;
-   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+   box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.05);
  }
 
  body.dark .menu {
-   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
  }
 
  @keyframes fadeIn {
