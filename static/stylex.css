@@ -417,3 +417,14 @@ body.dark .event-form button {
    }
  }
 }
+:root{ --menu-h: 72px; }
+
+#nodie iframe,
+#alarm iframe,
+#events iframe,
+#settings iframe{
+  width: 100%;
+  height: 652px;   /* misma altura que tenías en el inline */
+  border: none;
+  border-radius: 20px;
+}
