@@ -44,7 +44,7 @@
  /* Contenedor principal */
  .content {
    padding: 30px;
-   flex-grow: 1;
+   flex-grow: 1; 
  }
 
  /* Títulos */
@@ -80,6 +80,8 @@
    cursor: pointer;
    transition: color 0.3s;
    transition: all 0.25s ease-in-out;
+    flex: 1;
+     box-sizing: border-box;
  }
 
  .menu button:hover {
