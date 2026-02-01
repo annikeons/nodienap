@@ -43,7 +43,7 @@
 
  /* Contenedor principal */
  .content {
-   padding: 80px;
+   padding: 60px;
    flex-grow: 1; 
  }
 
@@ -140,7 +140,7 @@
 
 .section.active{ 
   display:block;
-padding-top: 100px; }
+ }
 
 
 
