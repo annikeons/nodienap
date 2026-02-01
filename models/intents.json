@@ -248,7 +248,7 @@
     "tag":"amor",
         "patterns": [
             "te quiero", "te amo", "tqm", "i love you", "love u", "ti amo",
-            "tqm nodie", "te quiero mucho nodie"
+            "tqm nodie", "te quiero mucho nodie","tkm"
         ],
         "responses": [
 "Cuac 💕 eres lo más lindo del lago 🌸",
@@ -434,7 +434,7 @@
 {
     "tag":"significado",
         "patterns": [
-            "por qué te llamas nodie", "qué significa nodie", "por qué ese nombre", "quien es nodie"
+            "por qué te llamas nodie", "qué significa nodie", "por qué ese nombre", "quien es nodie","como te lamas"
         ],
         "responses": [
             "Es un nombre lindo, ¿no crees? 🦆",
@@ -516,8 +516,8 @@
     "tag":"aventura",
         "patterns": [
             "cuentame una aventura", "una historia de aventura", "quiero una historia de aventura",
-            "cuéntame una aventura", "dime una aventura", "aventura nodie","aventura",
-            "buscame una historia de aventura", "relatame una aventura", "cuenta una aventura corta", "una historia"
+            "cuéntame una aventura", "dime una aventura", "aventura nodie","aventura","patoaventuras",
+            "buscame una historia de aventura", "relatame una aventura", "cuenta una aventura corta", "una historia","cuentame una historia"
         ],
         "responses": [
             "Había una vez un patito curioso que se atrevió a cruzar el lago más grande del bosque. ¿Quieres saber qué encontró? 🌊",
@@ -542,7 +542,7 @@
         "patterns": [
             "una historia romantica", "cuentame una historia romantica", "quiero una historia de amor",
             "cuentame algo romantico", "dime una historia de amor", "historia de amor nodie",
-            "cuentame algo bonito", "relatame una historia romantica","romance"
+            "cuentame algo bonito", "relatame una historia romantica","romance","amor","cuentame una historia"
         ],
         "responses": [
             "Había una vez dos patos que se cruzaban cada tarde en el lago... y un día, el destino los hizo nadar juntos 💛",
@@ -559,8 +559,8 @@
 {
     "tag":"terror",
         "patterns": [
-            "una historia de terror", "cuentame algo de miedo", "quiero una historia de terror",
-            "cuentame algo aterrador", "dame una historia de miedo", "historia de suspenso","terror"
+            "una historia de terror", "cuentame algo de miedo", "quiero una historia de terror","teror","horor",
+            "cuentame algo aterrador", "dame una historia de miedo", "historia de suspenso","terror","cuentame una historia"
         ],
         "responses": [
             "Una noche el lago estaba en silencio… hasta que un cuac resonó sin que hubiera nadie 🦆👻",
@@ -577,8 +577,8 @@
 {
     "tag":"graciosa",
         "patterns": [
-            "una historia graciosa", "cuentame algo divertido", "quiero una historia graciosa",
-            "dame una historia para reirme", "cuentame algo chistoso","Historia graciosa","graciosa"
+            "una historia graciosa", "cuentame algo divertido", "quiero una historia graciosa","chiste","chistoso",
+            "dame una historia para reirme", "cuentame algo chistoso","Historia graciosa","graciosa","cuentame una historia"
         ],
         "responses": [
             "Una vez quise volar... pero caí en el agua y terminé haciendo surf sin querer 🏄‍♂️🦆",
